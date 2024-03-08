@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jasmine Dupau">
+<meta name="dcterms.date" content="2024-03-08">
+
+<title>Amusons-nous avec Rstudio ! - Utilisation d’un package via Github</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Amusons-nous avec Rstudio !</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Qui suis-je ?</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Utilisation d’un package via Github</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">news</div>
+                <div class="quarto-category">code</div>
+                <div class="quarto-category">analysis</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jasmine Dupau </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 8, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="librairie-olympicweather" class="level2">
+<h2 class="anchored" data-anchor-id="librairie-olympicweather">Librairie olympicWeather</h2>
+<p>Le package olympicsWeather permet à l’utilisateur d’obtenir les prévisions météorologiques des sites olympiques comme la température ressentie et attendue ou encore les précipitations.<br>
+L’utilisateur a le choix entre entrer une adresse textuelle et écrire directement les coordonnées gps (latitude et longitude).<br>
+A la fin, l’utilisateur obtient un fichier json avec toutes les informations.</p>
+<section id="installation-de-la-librairie" class="level3">
+<h3 class="anchored" data-anchor-id="installation-de-la-librairie">Installation de la librairie</h3>
+<p>Pour installer la librairie, l’utilisateur doit avoir préalablement installé la librairie “remotes” puis installer le package olympicsWeather, relié à ma page github comme suit :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/jas056/olympicsWeather/tree/master"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="prévisions" class="level2">
+<h2 class="anchored" data-anchor-id="prévisions">Prévisions</h2>
+<p>Nous allons maintenant appliquer la fonction générique <strong>get_weather_forecast</strong> sur quelques exemples.</p>
+<section id="stade-de-france" class="level3">
+<h3 class="anchored" data-anchor-id="stade-de-france">Stade de France</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(OlympicWeather)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_weather_forecast</span>(<span class="st">"Stade de France"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[{"date_heure":"2024-03-08T00:00","temperature_celsius":5.9,"temperature_ressentie":2.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T01:00","temperature_celsius":5.2,"temperature_ressentie":1.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T02:00","temperature_celsius":4.5,"temperature_ressentie":1.3,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T03:00","temperature_celsius":4.2,"temperature_ressentie":0.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T04:00","temperature_celsius":3.7,"temperature_ressentie":0.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T05:00","temperature_celsius":3.3,"temperature_ressentie":0.2,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T06:00","temperature_celsius":3.1,"temperature_ressentie":-0.2,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T07:00","temperature_celsius":2.9,"temperature_ressentie":-0.3,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T08:00","temperature_celsius":3.9,"temperature_ressentie":0.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T09:00","temperature_celsius":6.6,"temperature_ressentie":3,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T10:00","temperature_celsius":8.8,"temperature_ressentie":5.2,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T11:00","temperature_celsius":10.8,"temperature_ressentie":7.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T12:00","temperature_celsius":12.5,"temperature_ressentie":9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T13:00","temperature_celsius":13.4,"temperature_ressentie":9.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T14:00","temperature_celsius":14,"temperature_ressentie":10.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T15:00","temperature_celsius":14.1,"temperature_ressentie":10.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T16:00","temperature_celsius":14.1,"temperature_ressentie":10.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T17:00","temperature_celsius":13.6,"temperature_ressentie":9.7,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T18:00","temperature_celsius":12.6,"temperature_ressentie":9.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T19:00","temperature_celsius":11.5,"temperature_ressentie":7.9,"temperature_proba":1,"precipitation":0},{"date_heure":"2024-03-08T20:00","temperature_celsius":10.9,"temperature_ressentie":7.1,"temperature_proba":2,"precipitation":0},{"date_heure":"2024-03-08T21:00","temperature_celsius":9.9,"temperature_ressentie":5.8,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-08T22:00","temperature_celsius":9.3,"temperature_ressentie":5,"temperature_proba":2,"precipitation":0},{"date_heure":"2024-03-08T23:00","temperature_celsius":9,"temperature_ressentie":5,"temperature_proba":1,"precipitation":0},{"date_heure":"2024-03-09T00:00","temperature_celsius":8.2,"temperature_ressentie":4.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T01:00","temperature_celsius":7.5,"temperature_ressentie":4.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T02:00","temperature_celsius":6.8,"temperature_ressentie":4.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T03:00","temperature_celsius":6.4,"temperature_ressentie":3.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T04:00","temperature_celsius":6.2,"temperature_ressentie":3.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T05:00","temperature_celsius":5.9,"temperature_ressentie":3.2,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T06:00","temperature_celsius":5.6,"temperature_ressentie":2.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T07:00","temperature_celsius":5.4,"temperature_ressentie":2.7,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T08:00","temperature_celsius":6.6,"temperature_ressentie":3.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T09:00","temperature_celsius":8.6,"temperature_ressentie":5.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-09T10:00","temperature_celsius":10.5,"temperature_ressentie":7.2,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-09T11:00","temperature_celsius":12.2,"temperature_ressentie":8.6,"temperature_proba":11,"precipitation":0},{"date_heure":"2024-03-09T12:00","temperature_celsius":13.2,"temperature_ressentie":9.4,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-09T13:00","temperature_celsius":13.6,"temperature_ressentie":9.3,"temperature_proba":41,"precipitation":0},{"date_heure":"2024-03-09T14:00","temperature_celsius":12.9,"temperature_ressentie":9,"temperature_proba":65,"precipitation":0.1},{"date_heure":"2024-03-09T15:00","temperature_celsius":11.9,"temperature_ressentie":8.8,"temperature_proba":90,"precipitation":0.4},{"date_heure":"2024-03-09T16:00","temperature_celsius":11.2,"temperature_ressentie":9.1,"temperature_proba":87,"precipitation":0.4},{"date_heure":"2024-03-09T17:00","temperature_celsius":10.5,"temperature_ressentie":8.9,"temperature_proba":84,"precipitation":1.1},{"date_heure":"2024-03-09T18:00","temperature_celsius":9.9,"temperature_ressentie":8.3,"temperature_proba":81,"precipitation":0.7},{"date_heure":"2024-03-09T19:00","temperature_celsius":9.5,"temperature_ressentie":8,"temperature_proba":77,"precipitation":0},{"date_heure":"2024-03-09T20:00","temperature_celsius":8.9,"temperature_ressentie":6.1,"temperature_proba":72,"precipitation":0},{"date_heure":"2024-03-09T21:00","temperature_celsius":8.5,"temperature_ressentie":6.2,"temperature_proba":68,"precipitation":0},{"date_heure":"2024-03-09T22:00","temperature_celsius":8.1,"temperature_ressentie":6.1,"temperature_proba":63,"precipitation":0},{"date_heure":"2024-03-09T23:00","temperature_celsius":7.7,"temperature_ressentie":5.7,"temperature_proba":57,"precipitation":0},{"date_heure":"2024-03-10T00:00","temperature_celsius":7.3,"temperature_ressentie":5.5,"temperature_proba":52,"precipitation":0},{"date_heure":"2024-03-10T01:00","temperature_celsius":7.2,"temperature_ressentie":5.2,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-10T02:00","temperature_celsius":7.1,"temperature_ressentie":5.4,"temperature_proba":43,"precipitation":0},{"date_heure":"2024-03-10T03:00","temperature_celsius":7.1,"temperature_ressentie":5.5,"temperature_proba":39,"precipitation":0},{"date_heure":"2024-03-10T04:00","temperature_celsius":6.8,"temperature_ressentie":5.5,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-10T05:00","temperature_celsius":6.5,"temperature_ressentie":5,"temperature_proba":45,"precipitation":0},{"date_heure":"2024-03-10T06:00","temperature_celsius":6.1,"temperature_ressentie":4.6,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-10T07:00","temperature_celsius":6,"temperature_ressentie":4.6,"temperature_proba":46,"precipitation":0},{"date_heure":"2024-03-10T08:00","temperature_celsius":6.4,"temperature_ressentie":5,"temperature_proba":44,"precipitation":0},{"date_heure":"2024-03-10T09:00","temperature_celsius":7,"temperature_ressentie":5.3,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-10T10:00","temperature_celsius":7.8,"temperature_ressentie":6.4,"temperature_proba":39,"precipitation":0},{"date_heure":"2024-03-10T11:00","temperature_celsius":8.8,"temperature_ressentie":7,"temperature_proba":35,"precipitation":0},{"date_heure":"2024-03-10T12:00","temperature_celsius":9.4,"temperature_ressentie":7.6,"temperature_proba":32,"precipitation":0},{"date_heure":"2024-03-10T13:00","temperature_celsius":10.1,"temperature_ressentie":8,"temperature_proba":35,"precipitation":0},{"date_heure":"2024-03-10T14:00","temperature_celsius":10.6,"temperature_ressentie":8.4,"temperature_proba":39,"precipitation":0},{"date_heure":"2024-03-10T15:00","temperature_celsius":11.2,"temperature_ressentie":8.8,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-10T16:00","temperature_celsius":11.1,"temperature_ressentie":8.7,"temperature_proba":45,"precipitation":0},{"date_heure":"2024-03-10T17:00","temperature_celsius":11,"temperature_ressentie":8.8,"temperature_proba":49,"precipitation":0},{"date_heure":"2024-03-10T18:00","temperature_celsius":10.5,"temperature_ressentie":8.4,"temperature_proba":52,"precipitation":0},{"date_heure":"2024-03-10T19:00","temperature_celsius":9.5,"temperature_ressentie":7.6,"temperature_proba":45,"precipitation":0},{"date_heure":"2024-03-10T20:00","temperature_celsius":8.6,"temperature_ressentie":6.6,"temperature_proba":39,"precipitation":0},{"date_heure":"2024-03-10T21:00","temperature_celsius":7.9,"temperature_ressentie":5.9,"temperature_proba":32,"precipitation":0},{"date_heure":"2024-03-10T22:00","temperature_celsius":7.4,"temperature_ressentie":5.4,"temperature_proba":26,"precipitation":0},{"date_heure":"2024-03-10T23:00","temperature_celsius":6.9,"temperature_ressentie":4.8,"temperature_proba":19,"precipitation":0},{"date_heure":"2024-03-11T00:00","temperature_celsius":6.3,"temperature_ressentie":4.3,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-11T01:00","temperature_celsius":5.8,"temperature_ressentie":3.8,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-11T02:00","temperature_celsius":5.3,"temperature_ressentie":3.4,"temperature_proba":20,"precipitation":0},{"date_heure":"2024-03-11T03:00","temperature_celsius":4.8,"temperature_ressentie":2.8,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T04:00","temperature_celsius":4.4,"temperature_ressentie":2.4,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T05:00","temperature_celsius":4,"temperature_ressentie":1.9,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T06:00","temperature_celsius":3.6,"temperature_ressentie":1.4,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T07:00","temperature_celsius":3.6,"temperature_ressentie":1.5,"temperature_proba":21,"precipitation":0},{"date_heure":"2024-03-11T08:00","temperature_celsius":4.9,"temperature_ressentie":3,"temperature_proba":18,"precipitation":0},{"date_heure":"2024-03-11T09:00","temperature_celsius":7,"temperature_ressentie":5.2,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-11T10:00","temperature_celsius":9,"temperature_ressentie":7.5,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-11T11:00","temperature_celsius":10.9,"temperature_ressentie":9.1,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-11T12:00","temperature_celsius":12.3,"temperature_ressentie":10.2,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-11T13:00","temperature_celsius":13.2,"temperature_ressentie":10.8,"temperature_proba":21,"precipitation":0},{"date_heure":"2024-03-11T14:00","temperature_celsius":13.5,"temperature_ressentie":10.9,"temperature_proba":27,"precipitation":0},{"date_heure":"2024-03-11T15:00","temperature_celsius":13.4,"temperature_ressentie":11.1,"temperature_proba":32,"precipitation":0},{"date_heure":"2024-03-11T16:00","temperature_celsius":13.6,"temperature_ressentie":11.6,"temperature_proba":34,"precipitation":0},{"date_heure":"2024-03-11T17:00","temperature_celsius":13.4,"temperature_ressentie":11.3,"temperature_proba":37,"precipitation":0},{"date_heure":"2024-03-11T18:00","temperature_celsius":12.2,"temperature_ressentie":9.8,"temperature_proba":39,"precipitation":0},{"date_heure":"2024-03-11T19:00","temperature_celsius":11.2,"temperature_ressentie":8.8,"temperature_proba":29,"precipitation":0},{"date_heure":"2024-03-11T20:00","temperature_celsius":10,"temperature_ressentie":7.7,"temperature_proba":20,"precipitation":0},{"date_heure":"2024-03-11T21:00","temperature_celsius":8.9,"temperature_ressentie":6.6,"temperature_proba":10,"precipitation":0},{"date_heure":"2024-03-11T22:00","temperature_celsius":8,"temperature_ressentie":5.9,"temperature_proba":8,"precipitation":0},{"date_heure":"2024-03-11T23:00","temperature_celsius":7.1,"temperature_ressentie":5.2,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-12T00:00","temperature_celsius":6.5,"temperature_ressentie":4.7,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-12T01:00","temperature_celsius":6,"temperature_ressentie":4.3,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-12T02:00","temperature_celsius":5.8,"temperature_ressentie":4,"temperature_proba":10,"precipitation":0},{"date_heure":"2024-03-12T03:00","temperature_celsius":5.5,"temperature_ressentie":3.7,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-12T04:00","temperature_celsius":5.1,"temperature_ressentie":3.2,"temperature_proba":11,"precipitation":0},{"date_heure":"2024-03-12T05:00","temperature_celsius":4.6,"temperature_ressentie":2.7,"temperature_proba":8,"precipitation":0},{"date_heure":"2024-03-12T06:00","temperature_celsius":4.6,"temperature_ressentie":2.6,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-12T07:00","temperature_celsius":5.3,"temperature_ressentie":3.3,"temperature_proba":10,"precipitation":0},{"date_heure":"2024-03-12T08:00","temperature_celsius":6.4,"temperature_ressentie":4.2,"temperature_proba":15,"precipitation":0},{"date_heure":"2024-03-12T09:00","temperature_celsius":7.6,"temperature_ressentie":5.3,"temperature_proba":19,"precipitation":0},{"date_heure":"2024-03-12T10:00","temperature_celsius":8.9,"temperature_ressentie":6.6,"temperature_proba":20,"precipitation":0},{"date_heure":"2024-03-12T11:00","temperature_celsius":10.1,"temperature_ressentie":7.8,"temperature_proba":22,"precipitation":0},{"date_heure":"2024-03-12T12:00","temperature_celsius":11.2,"temperature_ressentie":8.8,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-12T13:00","temperature_celsius":11.8,"temperature_ressentie":9.4,"temperature_proba":24,"precipitation":0},{"date_heure":"2024-03-12T14:00","temperature_celsius":12.2,"temperature_ressentie":9.8,"temperature_proba":25,"precipitation":0},{"date_heure":"2024-03-12T15:00","temperature_celsius":12.3,"temperature_ressentie":9.9,"temperature_proba":26,"precipitation":0},{"date_heure":"2024-03-12T16:00","temperature_celsius":12.1,"temperature_ressentie":9.9,"temperature_proba":19,"precipitation":0},{"date_heure":"2024-03-12T17:00","temperature_celsius":11.6,"temperature_ressentie":9.7,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-12T18:00","temperature_celsius":11.1,"temperature_ressentie":9.4,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-12T19:00","temperature_celsius":10.7,"temperature_ressentie":9.3,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-12T20:00","temperature_celsius":10.1,"temperature_ressentie":9,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-12T21:00","temperature_celsius":9.6,"temperature_ressentie":8.2,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-12T22:00","temperature_celsius":9,"temperature_ressentie":7.5,"temperature_proba":2,"precipitation":0},{"date_heure":"2024-03-12T23:00","temperature_celsius":8.3,"temperature_ressentie":6.7,"temperature_proba":1,"precipitation":0},{"date_heure":"2024-03-13T00:00","temperature_celsius":7.6,"temperature_ressentie":6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T01:00","temperature_celsius":6.7,"temperature_ressentie":5.1,"temperature_proba":2,"precipitation":0},{"date_heure":"2024-03-13T02:00","temperature_celsius":5.9,"temperature_ressentie":4.2,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-13T03:00","temperature_celsius":5.1,"temperature_ressentie":3.3,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-13T04:00","temperature_celsius":4.3,"temperature_ressentie":2.4,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-13T05:00","temperature_celsius":3.6,"temperature_ressentie":1.6,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-13T06:00","temperature_celsius":3.5,"temperature_ressentie":1.3,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-13T07:00","temperature_celsius":4,"temperature_ressentie":1.9,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-13T08:00","temperature_celsius":5,"temperature_ressentie":3,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-13T09:00","temperature_celsius":6.4,"temperature_ressentie":4.4,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-13T10:00","temperature_celsius":8.6,"temperature_ressentie":6.7,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-13T11:00","temperature_celsius":11.3,"temperature_ressentie":9.3,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-13T12:00","temperature_celsius":13.2,"temperature_ressentie":11.3,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-13T13:00","temperature_celsius":14.3,"temperature_ressentie":12.1,"temperature_proba":7,"precipitation":0},{"date_heure":"2024-03-13T14:00","temperature_celsius":14.7,"temperature_ressentie":12.2,"temperature_proba":9,"precipitation":0},{"date_heure":"2024-03-13T15:00","temperature_celsius":14.8,"temperature_ressentie":12.2,"temperature_proba":10,"precipitation":0},{"date_heure":"2024-03-13T16:00","temperature_celsius":14.4,"temperature_ressentie":11.9,"temperature_proba":9,"precipitation":0},{"date_heure":"2024-03-13T17:00","temperature_celsius":13.5,"temperature_ressentie":11.3,"temperature_proba":7,"precipitation":0},{"date_heure":"2024-03-13T18:00","temperature_celsius":12.5,"temperature_ressentie":10.5,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-13T19:00","temperature_celsius":11.4,"temperature_ressentie":9.6,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-13T20:00","temperature_celsius":10.1,"temperature_ressentie":8.3,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-13T21:00","temperature_celsius":9.1,"temperature_ressentie":7.3,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-13T22:00","temperature_celsius":8.3,"temperature_ressentie":6.6,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-13T23:00","temperature_celsius":7.8,"temperature_ressentie":6.1,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T00:00","temperature_celsius":7.3,"temperature_ressentie":5.5,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T01:00","temperature_celsius":6.9,"temperature_ressentie":5,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-14T02:00","temperature_celsius":6.4,"temperature_ressentie":4.5,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-14T03:00","temperature_celsius":6,"temperature_ressentie":4.1,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-14T04:00","temperature_celsius":5.4,"temperature_ressentie":3.4,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-14T05:00","temperature_celsius":4.7,"temperature_ressentie":2.5,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-14T06:00","temperature_celsius":4.6,"temperature_ressentie":2.4,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T07:00","temperature_celsius":5.5,"temperature_ressentie":3.2,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T08:00","temperature_celsius":6.9,"temperature_ressentie":4.5,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T09:00","temperature_celsius":8.6,"temperature_ressentie":6.1,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T10:00","temperature_celsius":10.7,"temperature_ressentie":8,"temperature_proba":7,"precipitation":0},{"date_heure":"2024-03-14T11:00","temperature_celsius":13,"temperature_ressentie":10.2,"temperature_proba":9,"precipitation":0},{"date_heure":"2024-03-14T12:00","temperature_celsius":14.7,"temperature_ressentie":12,"temperature_proba":10,"precipitation":0},{"date_heure":"2024-03-14T13:00","temperature_celsius":15.7,"temperature_ressentie":12.9,"temperature_proba":11,"precipitation":0},{"date_heure":"2024-03-14T14:00","temperature_celsius":16.1,"temperature_ressentie":13,"temperature_proba":12,"precipitation":0},{"date_heure":"2024-03-14T15:00","temperature_celsius":16.1,"temperature_ressentie":13.1,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-14T16:00","temperature_celsius":15.7,"temperature_ressentie":13,"temperature_proba":14,"precipitation":0},{"date_heure":"2024-03-14T17:00","temperature_celsius":14.9,"temperature_ressentie":12.7,"temperature_proba":15,"precipitation":0},{"date_heure":"2024-03-14T18:00","temperature_celsius":14,"temperature_ressentie":12.2,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-14T19:00","temperature_celsius":13,"temperature_ressentie":11.4,"temperature_proba":15,"precipitation":0},{"date_heure":"2024-03-14T20:00","temperature_celsius":12,"temperature_ressentie":10.4,"temperature_proba":14,"precipitation":0},{"date_heure":"2024-03-14T21:00","temperature_celsius":11.1,"temperature_ressentie":9.6,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-14T22:00","temperature_celsius":10.5,"temperature_ressentie":9.1,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-14T23:00","temperature_celsius":10,"temperature_ressentie":8.7,"temperature_proba":13,"precipitation":0}] </code></pre>
+</div>
+</div>
+</section>
+<section id="tahiti" class="level3">
+<h3 class="anchored" data-anchor-id="tahiti">Tahiti</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_weather_forecast</span>(<span class="st">"Tahiti"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[{"date_heure":"2024-03-08T00:00","temperature_celsius":16.3,"temperature_ressentie":17.8,"temperature_proba":84,"precipitation":0},{"date_heure":"2024-03-08T01:00","temperature_celsius":16.5,"temperature_ressentie":17.7,"temperature_proba":87,"precipitation":0.1},{"date_heure":"2024-03-08T02:00","temperature_celsius":16.4,"temperature_ressentie":17.5,"temperature_proba":91,"precipitation":0.5},{"date_heure":"2024-03-08T03:00","temperature_celsius":16.6,"temperature_ressentie":17.4,"temperature_proba":94,"precipitation":0.2},{"date_heure":"2024-03-08T04:00","temperature_celsius":16.9,"temperature_ressentie":17.5,"temperature_proba":88,"precipitation":0},{"date_heure":"2024-03-08T05:00","temperature_celsius":17.1,"temperature_ressentie":17.7,"temperature_proba":83,"precipitation":0},{"date_heure":"2024-03-08T06:00","temperature_celsius":17.5,"temperature_ressentie":18.1,"temperature_proba":77,"precipitation":0.1},{"date_heure":"2024-03-08T07:00","temperature_celsius":17.5,"temperature_ressentie":18.2,"temperature_proba":85,"precipitation":0},{"date_heure":"2024-03-08T08:00","temperature_celsius":17.4,"temperature_ressentie":18.1,"temperature_proba":92,"precipitation":0},{"date_heure":"2024-03-08T09:00","temperature_celsius":17.3,"temperature_ressentie":18,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T10:00","temperature_celsius":17.4,"temperature_ressentie":17.9,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T11:00","temperature_celsius":17.3,"temperature_ressentie":18.1,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T12:00","temperature_celsius":17,"temperature_ressentie":18,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T13:00","temperature_celsius":17.1,"temperature_ressentie":17.9,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T14:00","temperature_celsius":17.1,"temperature_ressentie":17.9,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T15:00","temperature_celsius":17.2,"temperature_ressentie":17.9,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T16:00","temperature_celsius":17.2,"temperature_ressentie":17.8,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T17:00","temperature_celsius":17.2,"temperature_ressentie":17.9,"temperature_proba":100,"precipitation":0.1},{"date_heure":"2024-03-08T18:00","temperature_celsius":17.3,"temperature_ressentie":18.1,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T19:00","temperature_celsius":17.2,"temperature_ressentie":18.1,"temperature_proba":99,"precipitation":0.1},{"date_heure":"2024-03-08T20:00","temperature_celsius":17.2,"temperature_ressentie":18.4,"temperature_proba":98,"precipitation":0.1},{"date_heure":"2024-03-08T21:00","temperature_celsius":17.1,"temperature_ressentie":18.6,"temperature_proba":97,"precipitation":0.1},{"date_heure":"2024-03-08T22:00","temperature_celsius":17.2,"temperature_ressentie":19.3,"temperature_proba":98,"precipitation":0.1},{"date_heure":"2024-03-08T23:00","temperature_celsius":17.2,"temperature_ressentie":19.3,"temperature_proba":99,"precipitation":0.1},{"date_heure":"2024-03-09T00:00","temperature_celsius":16.9,"temperature_ressentie":19.1,"temperature_proba":100,"precipitation":0.3},{"date_heure":"2024-03-09T01:00","temperature_celsius":16.8,"temperature_ressentie":18,"temperature_proba":100,"precipitation":0.6},{"date_heure":"2024-03-09T02:00","temperature_celsius":16.8,"temperature_ressentie":17.8,"temperature_proba":100,"precipitation":0.6},{"date_heure":"2024-03-09T03:00","temperature_celsius":16.8,"temperature_ressentie":17.7,"temperature_proba":100,"precipitation":1},{"date_heure":"2024-03-09T04:00","temperature_celsius":16.8,"temperature_ressentie":17.7,"temperature_proba":99,"precipitation":1},{"date_heure":"2024-03-09T05:00","temperature_celsius":16.9,"temperature_ressentie":17.8,"temperature_proba":98,"precipitation":0.2},{"date_heure":"2024-03-09T06:00","temperature_celsius":17,"temperature_ressentie":18.1,"temperature_proba":97,"precipitation":0.1},{"date_heure":"2024-03-09T07:00","temperature_celsius":17,"temperature_ressentie":18.2,"temperature_proba":90,"precipitation":0.1},{"date_heure":"2024-03-09T08:00","temperature_celsius":17.2,"temperature_ressentie":18,"temperature_proba":84,"precipitation":0},{"date_heure":"2024-03-09T09:00","temperature_celsius":17.4,"temperature_ressentie":18,"temperature_proba":77,"precipitation":0},{"date_heure":"2024-03-09T10:00","temperature_celsius":17.5,"temperature_ressentie":18.1,"temperature_proba":78,"precipitation":0},{"date_heure":"2024-03-09T11:00","temperature_celsius":17.6,"temperature_ressentie":18.2,"temperature_proba":80,"precipitation":0},{"date_heure":"2024-03-09T12:00","temperature_celsius":17.6,"temperature_ressentie":18.3,"temperature_proba":81,"precipitation":0},{"date_heure":"2024-03-09T13:00","temperature_celsius":17.5,"temperature_ressentie":18.4,"temperature_proba":81,"precipitation":0},{"date_heure":"2024-03-09T14:00","temperature_celsius":17.5,"temperature_ressentie":18.4,"temperature_proba":81,"precipitation":0},{"date_heure":"2024-03-09T15:00","temperature_celsius":17.5,"temperature_ressentie":18.3,"temperature_proba":81,"precipitation":0},{"date_heure":"2024-03-09T16:00","temperature_celsius":17.5,"temperature_ressentie":18.3,"temperature_proba":76,"precipitation":0},{"date_heure":"2024-03-09T17:00","temperature_celsius":17.6,"temperature_ressentie":18.3,"temperature_proba":70,"precipitation":0},{"date_heure":"2024-03-09T18:00","temperature_celsius":17.7,"temperature_ressentie":18.5,"temperature_proba":65,"precipitation":0},{"date_heure":"2024-03-09T19:00","temperature_celsius":17.7,"temperature_ressentie":18.7,"temperature_proba":71,"precipitation":0},{"date_heure":"2024-03-09T20:00","temperature_celsius":17.7,"temperature_ressentie":19.5,"temperature_proba":78,"precipitation":0},{"date_heure":"2024-03-09T21:00","temperature_celsius":17.7,"temperature_ressentie":20.4,"temperature_proba":84,"precipitation":0},{"date_heure":"2024-03-09T22:00","temperature_celsius":17.6,"temperature_ressentie":20.6,"temperature_proba":86,"precipitation":0},{"date_heure":"2024-03-09T23:00","temperature_celsius":17.4,"temperature_ressentie":20.8,"temperature_proba":88,"precipitation":0},{"date_heure":"2024-03-10T00:00","temperature_celsius":17.3,"temperature_ressentie":20,"temperature_proba":90,"precipitation":0},{"date_heure":"2024-03-10T01:00","temperature_celsius":17.3,"temperature_ressentie":18.8,"temperature_proba":93,"precipitation":0.1},{"date_heure":"2024-03-10T02:00","temperature_celsius":17,"temperature_ressentie":17.9,"temperature_proba":97,"precipitation":0.2},{"date_heure":"2024-03-10T03:00","temperature_celsius":16.7,"temperature_ressentie":17.6,"temperature_proba":100,"precipitation":0.3},{"date_heure":"2024-03-10T04:00","temperature_celsius":16.6,"temperature_ressentie":17.5,"temperature_proba":99,"precipitation":0.6},{"date_heure":"2024-03-10T05:00","temperature_celsius":16.8,"temperature_ressentie":17.7,"temperature_proba":98,"precipitation":0.1},{"date_heure":"2024-03-10T06:00","temperature_celsius":17,"temperature_ressentie":18.2,"temperature_proba":97,"precipitation":0.1},{"date_heure":"2024-03-10T07:00","temperature_celsius":17.1,"temperature_ressentie":18.3,"temperature_proba":96,"precipitation":0},{"date_heure":"2024-03-10T08:00","temperature_celsius":17.1,"temperature_ressentie":18.4,"temperature_proba":95,"precipitation":0.1},{"date_heure":"2024-03-10T09:00","temperature_celsius":17.1,"temperature_ressentie":18.3,"temperature_proba":94,"precipitation":0},{"date_heure":"2024-03-10T10:00","temperature_celsius":17.1,"temperature_ressentie":18.5,"temperature_proba":92,"precipitation":0},{"date_heure":"2024-03-10T11:00","temperature_celsius":17.1,"temperature_ressentie":18.3,"temperature_proba":89,"precipitation":0.1},{"date_heure":"2024-03-10T12:00","temperature_celsius":17.1,"temperature_ressentie":18.2,"temperature_proba":87,"precipitation":0},{"date_heure":"2024-03-10T13:00","temperature_celsius":17.1,"temperature_ressentie":18.1,"temperature_proba":86,"precipitation":0},{"date_heure":"2024-03-10T14:00","temperature_celsius":17.1,"temperature_ressentie":18,"temperature_proba":85,"precipitation":0},{"date_heure":"2024-03-10T15:00","temperature_celsius":17,"temperature_ressentie":18,"temperature_proba":84,"precipitation":0},{"date_heure":"2024-03-10T16:00","temperature_celsius":16.9,"temperature_ressentie":17.8,"temperature_proba":73,"precipitation":0.1},{"date_heure":"2024-03-10T17:00","temperature_celsius":16.8,"temperature_ressentie":17.9,"temperature_proba":63,"precipitation":0.1},{"date_heure":"2024-03-10T18:00","temperature_celsius":16.7,"temperature_ressentie":17.7,"temperature_proba":52,"precipitation":0.1},{"date_heure":"2024-03-10T19:00","temperature_celsius":16.7,"temperature_ressentie":17.8,"temperature_proba":60,"precipitation":0.1},{"date_heure":"2024-03-10T20:00","temperature_celsius":16.7,"temperature_ressentie":17.9,"temperature_proba":69,"precipitation":0.1},{"date_heure":"2024-03-10T21:00","temperature_celsius":16.7,"temperature_ressentie":18.8,"temperature_proba":77,"precipitation":0.1},{"date_heure":"2024-03-10T22:00","temperature_celsius":17,"temperature_ressentie":19.9,"temperature_proba":77,"precipitation":0},{"date_heure":"2024-03-10T23:00","temperature_celsius":17.2,"temperature_ressentie":19.8,"temperature_proba":77,"precipitation":0},{"date_heure":"2024-03-11T00:00","temperature_celsius":17.4,"temperature_ressentie":19.7,"temperature_proba":77,"precipitation":0},{"date_heure":"2024-03-11T01:00","temperature_celsius":17.4,"temperature_ressentie":19.2,"temperature_proba":81,"precipitation":0},{"date_heure":"2024-03-11T02:00","temperature_celsius":17.4,"temperature_ressentie":18.1,"temperature_proba":86,"precipitation":0},{"date_heure":"2024-03-11T03:00","temperature_celsius":17.2,"temperature_ressentie":17.7,"temperature_proba":90,"precipitation":0.1},{"date_heure":"2024-03-11T04:00","temperature_celsius":17.2,"temperature_ressentie":17.9,"temperature_proba":80,"precipitation":0.1},{"date_heure":"2024-03-11T05:00","temperature_celsius":17.5,"temperature_ressentie":18.3,"temperature_proba":71,"precipitation":0},{"date_heure":"2024-03-11T06:00","temperature_celsius":17.5,"temperature_ressentie":18.6,"temperature_proba":61,"precipitation":0},{"date_heure":"2024-03-11T07:00","temperature_celsius":17.3,"temperature_ressentie":18.3,"temperature_proba":60,"precipitation":0.1},{"date_heure":"2024-03-11T08:00","temperature_celsius":17.3,"temperature_ressentie":18.2,"temperature_proba":59,"precipitation":0.1},{"date_heure":"2024-03-11T09:00","temperature_celsius":17.4,"temperature_ressentie":18.4,"temperature_proba":58,"precipitation":0},{"date_heure":"2024-03-11T10:00","temperature_celsius":17.4,"temperature_ressentie":18.5,"temperature_proba":50,"precipitation":0},{"date_heure":"2024-03-11T11:00","temperature_celsius":17.3,"temperature_ressentie":18.6,"temperature_proba":43,"precipitation":0},{"date_heure":"2024-03-11T12:00","temperature_celsius":17.2,"temperature_ressentie":18.4,"temperature_proba":35,"precipitation":0},{"date_heure":"2024-03-11T13:00","temperature_celsius":17.2,"temperature_ressentie":18.5,"temperature_proba":41,"precipitation":0},{"date_heure":"2024-03-11T14:00","temperature_celsius":17.1,"temperature_ressentie":18.2,"temperature_proba":46,"precipitation":0.1},{"date_heure":"2024-03-11T15:00","temperature_celsius":17.3,"temperature_ressentie":18.4,"temperature_proba":52,"precipitation":0},{"date_heure":"2024-03-11T16:00","temperature_celsius":17.4,"temperature_ressentie":18.5,"temperature_proba":49,"precipitation":0},{"date_heure":"2024-03-11T17:00","temperature_celsius":17.6,"temperature_ressentie":18.7,"temperature_proba":45,"precipitation":0},{"date_heure":"2024-03-11T18:00","temperature_celsius":17.6,"temperature_ressentie":18.9,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-11T19:00","temperature_celsius":17.6,"temperature_ressentie":18.8,"temperature_proba":43,"precipitation":0.1},{"date_heure":"2024-03-11T20:00","temperature_celsius":17.5,"temperature_ressentie":19.2,"temperature_proba":44,"precipitation":0.1},{"date_heure":"2024-03-11T21:00","temperature_celsius":17.4,"temperature_ressentie":20.1,"temperature_proba":45,"precipitation":0.1},{"date_heure":"2024-03-11T22:00","temperature_celsius":17.3,"temperature_ressentie":20.9,"temperature_proba":48,"precipitation":0.1},{"date_heure":"2024-03-11T23:00","temperature_celsius":17.2,"temperature_ressentie":21,"temperature_proba":52,"precipitation":0.1},{"date_heure":"2024-03-12T00:00","temperature_celsius":17.2,"temperature_ressentie":20.5,"temperature_proba":55,"precipitation":0.1},{"date_heure":"2024-03-12T01:00","temperature_celsius":17.2,"temperature_ressentie":19.7,"temperature_proba":56,"precipitation":0.1},{"date_heure":"2024-03-12T02:00","temperature_celsius":17.3,"temperature_ressentie":18.6,"temperature_proba":57,"precipitation":0.1},{"date_heure":"2024-03-12T03:00","temperature_celsius":17.3,"temperature_ressentie":18.6,"temperature_proba":58,"precipitation":0.1},{"date_heure":"2024-03-12T04:00","temperature_celsius":17.4,"temperature_ressentie":18.6,"temperature_proba":55,"precipitation":0.3},{"date_heure":"2024-03-12T05:00","temperature_celsius":17.4,"temperature_ressentie":18.5,"temperature_proba":51,"precipitation":0.3},{"date_heure":"2024-03-12T06:00","temperature_celsius":17.4,"temperature_ressentie":18.4,"temperature_proba":48,"precipitation":0.3},{"date_heure":"2024-03-12T07:00","temperature_celsius":17.4,"temperature_ressentie":18.4,"temperature_proba":44,"precipitation":0.2},{"date_heure":"2024-03-12T08:00","temperature_celsius":17.3,"temperature_ressentie":18.4,"temperature_proba":39,"precipitation":0.2},{"date_heure":"2024-03-12T09:00","temperature_celsius":17.3,"temperature_ressentie":18.4,"temperature_proba":35,"precipitation":0.2},{"date_heure":"2024-03-12T10:00","temperature_celsius":17.2,"temperature_ressentie":18.4,"temperature_proba":35,"precipitation":0.1},{"date_heure":"2024-03-12T11:00","temperature_celsius":17.2,"temperature_ressentie":18.5,"temperature_proba":35,"precipitation":0.1},{"date_heure":"2024-03-12T12:00","temperature_celsius":17.2,"temperature_ressentie":18.5,"temperature_proba":35,"precipitation":0.1},{"date_heure":"2024-03-12T13:00","temperature_celsius":17.3,"temperature_ressentie":18.5,"temperature_proba":32,"precipitation":0},{"date_heure":"2024-03-12T14:00","temperature_celsius":17.4,"temperature_ressentie":18.6,"temperature_proba":29,"precipitation":0},{"date_heure":"2024-03-12T15:00","temperature_celsius":17.5,"temperature_ressentie":18.6,"temperature_proba":26,"precipitation":0},{"date_heure":"2024-03-12T16:00","temperature_celsius":17.6,"temperature_ressentie":18.7,"temperature_proba":27,"precipitation":0},{"date_heure":"2024-03-12T17:00","temperature_celsius":17.8,"temperature_ressentie":18.9,"temperature_proba":28,"precipitation":0},{"date_heure":"2024-03-12T18:00","temperature_celsius":17.9,"temperature_ressentie":19,"temperature_proba":29,"precipitation":0},{"date_heure":"2024-03-12T19:00","temperature_celsius":17.9,"temperature_ressentie":19,"temperature_proba":40,"precipitation":0},{"date_heure":"2024-03-12T20:00","temperature_celsius":17.9,"temperature_ressentie":19.1,"temperature_proba":50,"precipitation":0},{"date_heure":"2024-03-12T21:00","temperature_celsius":18,"temperature_ressentie":20.1,"temperature_proba":61,"precipitation":0},{"date_heure":"2024-03-12T22:00","temperature_celsius":18,"temperature_ressentie":20.7,"temperature_proba":65,"precipitation":0},{"date_heure":"2024-03-12T23:00","temperature_celsius":18.1,"temperature_ressentie":20.9,"temperature_proba":70,"precipitation":0},{"date_heure":"2024-03-13T00:00","temperature_celsius":18.2,"temperature_ressentie":20.8,"temperature_proba":74,"precipitation":0},{"date_heure":"2024-03-13T01:00","temperature_celsius":18.3,"temperature_ressentie":20.4,"temperature_proba":69,"precipitation":0},{"date_heure":"2024-03-13T02:00","temperature_celsius":18.4,"temperature_ressentie":19.6,"temperature_proba":63,"precipitation":0},{"date_heure":"2024-03-13T03:00","temperature_celsius":18.5,"temperature_ressentie":19.7,"temperature_proba":58,"precipitation":0},{"date_heure":"2024-03-13T04:00","temperature_celsius":18.5,"temperature_ressentie":19.8,"temperature_proba":55,"precipitation":0},{"date_heure":"2024-03-13T05:00","temperature_celsius":18.5,"temperature_ressentie":19.6,"temperature_proba":51,"precipitation":0},{"date_heure":"2024-03-13T06:00","temperature_celsius":18.5,"temperature_ressentie":19.6,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-13T07:00","temperature_celsius":18.5,"temperature_ressentie":19.6,"temperature_proba":45,"precipitation":0},{"date_heure":"2024-03-13T08:00","temperature_celsius":18.5,"temperature_ressentie":19.6,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-13T09:00","temperature_celsius":18.5,"temperature_ressentie":19.6,"temperature_proba":39,"precipitation":0},{"date_heure":"2024-03-13T10:00","temperature_celsius":18.4,"temperature_ressentie":19.5,"temperature_proba":40,"precipitation":0},{"date_heure":"2024-03-13T11:00","temperature_celsius":18.4,"temperature_ressentie":19.4,"temperature_proba":41,"precipitation":0},{"date_heure":"2024-03-13T12:00","temperature_celsius":18.4,"temperature_ressentie":19.4,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-13T13:00","temperature_celsius":18.4,"temperature_ressentie":19.5,"temperature_proba":43,"precipitation":0},{"date_heure":"2024-03-13T14:00","temperature_celsius":18.6,"temperature_ressentie":19.7,"temperature_proba":44,"precipitation":0},{"date_heure":"2024-03-13T15:00","temperature_celsius":18.6,"temperature_ressentie":19.8,"temperature_proba":45,"precipitation":0},{"date_heure":"2024-03-13T16:00","temperature_celsius":18.6,"temperature_ressentie":19.8,"temperature_proba":47,"precipitation":0},{"date_heure":"2024-03-13T17:00","temperature_celsius":18.6,"temperature_ressentie":19.9,"temperature_proba":50,"precipitation":0},{"date_heure":"2024-03-13T18:00","temperature_celsius":18.5,"temperature_ressentie":19.9,"temperature_proba":52,"precipitation":0},{"date_heure":"2024-03-13T19:00","temperature_celsius":18.4,"temperature_ressentie":19.9,"temperature_proba":44,"precipitation":0},{"date_heure":"2024-03-13T20:00","temperature_celsius":18.3,"temperature_ressentie":20.1,"temperature_proba":37,"precipitation":0},{"date_heure":"2024-03-13T21:00","temperature_celsius":18.2,"temperature_ressentie":20.9,"temperature_proba":29,"precipitation":0},{"date_heure":"2024-03-13T22:00","temperature_celsius":18.1,"temperature_ressentie":21.3,"temperature_proba":35,"precipitation":0.1},{"date_heure":"2024-03-13T23:00","temperature_celsius":18,"temperature_ressentie":21.1,"temperature_proba":42,"precipitation":0.1},{"date_heure":"2024-03-14T00:00","temperature_celsius":18,"temperature_ressentie":20.7,"temperature_proba":48,"precipitation":0.1},{"date_heure":"2024-03-14T01:00","temperature_celsius":18,"temperature_ressentie":20.2,"temperature_proba":49,"precipitation":0},{"date_heure":"2024-03-14T02:00","temperature_celsius":18.2,"temperature_ressentie":19.6,"temperature_proba":51,"precipitation":0},{"date_heure":"2024-03-14T03:00","temperature_celsius":18.3,"temperature_ressentie":19.8,"temperature_proba":52,"precipitation":0},{"date_heure":"2024-03-14T04:00","temperature_celsius":18.3,"temperature_ressentie":19.9,"temperature_proba":46,"precipitation":0},{"date_heure":"2024-03-14T05:00","temperature_celsius":18.3,"temperature_ressentie":20,"temperature_proba":41,"precipitation":0},{"date_heure":"2024-03-14T06:00","temperature_celsius":18.3,"temperature_ressentie":20,"temperature_proba":35,"precipitation":0},{"date_heure":"2024-03-14T07:00","temperature_celsius":18.4,"temperature_ressentie":20.2,"temperature_proba":32,"precipitation":0},{"date_heure":"2024-03-14T08:00","temperature_celsius":18.4,"temperature_ressentie":20.2,"temperature_proba":29,"precipitation":0},{"date_heure":"2024-03-14T09:00","temperature_celsius":18.4,"temperature_ressentie":20.3,"temperature_proba":26,"precipitation":0},{"date_heure":"2024-03-14T10:00","temperature_celsius":18.1,"temperature_ressentie":20.1,"temperature_proba":27,"precipitation":0.8},{"date_heure":"2024-03-14T11:00","temperature_celsius":17.7,"temperature_ressentie":19.6,"temperature_proba":28,"precipitation":0.8},{"date_heure":"2024-03-14T12:00","temperature_celsius":17.4,"temperature_ressentie":19.3,"temperature_proba":29,"precipitation":0.8},{"date_heure":"2024-03-14T13:00","temperature_celsius":17.3,"temperature_ressentie":19.1,"temperature_proba":31,"precipitation":1.5},{"date_heure":"2024-03-14T14:00","temperature_celsius":17.3,"temperature_ressentie":19,"temperature_proba":33,"precipitation":1.5},{"date_heure":"2024-03-14T15:00","temperature_celsius":17.3,"temperature_ressentie":19,"temperature_proba":35,"precipitation":1.5},{"date_heure":"2024-03-14T16:00","temperature_celsius":17.5,"temperature_ressentie":19.1,"temperature_proba":34,"precipitation":0.2},{"date_heure":"2024-03-14T17:00","temperature_celsius":17.7,"temperature_ressentie":19.5,"temperature_proba":33,"precipitation":0.2},{"date_heure":"2024-03-14T18:00","temperature_celsius":17.9,"temperature_ressentie":19.6,"temperature_proba":32,"precipitation":0.2},{"date_heure":"2024-03-14T19:00","temperature_celsius":18,"temperature_ressentie":19.6,"temperature_proba":33,"precipitation":0},{"date_heure":"2024-03-14T20:00","temperature_celsius":18,"temperature_ressentie":19.9,"temperature_proba":34,"precipitation":0},{"date_heure":"2024-03-14T21:00","temperature_celsius":18,"temperature_ressentie":20.8,"temperature_proba":35,"precipitation":0},{"date_heure":"2024-03-14T22:00","temperature_celsius":18.1,"temperature_ressentie":21.5,"temperature_proba":35,"precipitation":0},{"date_heure":"2024-03-14T23:00","temperature_celsius":18.2,"temperature_ressentie":21.8,"temperature_proba":35,"precipitation":0}] </code></pre>
+</div>
+</div>
+</section>
+<section id="coordonnées-gps" class="level3">
+<h3 class="anchored" data-anchor-id="coordonnées-gps">coordonnées GPS</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_weather_forecast</span>(<span class="fu">c</span>(<span class="fl">43.276703</span>,<span class="fl">5.334791</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[{"date_heure":"2024-03-08T00:00","temperature_celsius":10.4,"temperature_ressentie":7,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T01:00","temperature_celsius":10.3,"temperature_ressentie":6.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T02:00","temperature_celsius":10.1,"temperature_ressentie":6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T03:00","temperature_celsius":10.7,"temperature_ressentie":6.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T04:00","temperature_celsius":10.7,"temperature_ressentie":7.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T05:00","temperature_celsius":12.1,"temperature_ressentie":6.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T06:00","temperature_celsius":12.1,"temperature_ressentie":5.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T07:00","temperature_celsius":12.7,"temperature_ressentie":6.2,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T08:00","temperature_celsius":12.8,"temperature_ressentie":6.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T09:00","temperature_celsius":12.6,"temperature_ressentie":5.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-08T10:00","temperature_celsius":13.8,"temperature_ressentie":6.4,"temperature_proba":31,"precipitation":0},{"date_heure":"2024-03-08T11:00","temperature_celsius":13.1,"temperature_ressentie":5.7,"temperature_proba":63,"precipitation":0.6},{"date_heure":"2024-03-08T12:00","temperature_celsius":11.1,"temperature_ressentie":3.9,"temperature_proba":94,"precipitation":1.2},{"date_heure":"2024-03-08T13:00","temperature_celsius":11.8,"temperature_ressentie":3.8,"temperature_proba":96,"precipitation":0.8},{"date_heure":"2024-03-08T14:00","temperature_celsius":11.8,"temperature_ressentie":4.8,"temperature_proba":98,"precipitation":1.9},{"date_heure":"2024-03-08T15:00","temperature_celsius":10.7,"temperature_ressentie":3.3,"temperature_proba":100,"precipitation":0.6},{"date_heure":"2024-03-08T16:00","temperature_celsius":11.4,"temperature_ressentie":5.5,"temperature_proba":100,"precipitation":0.6},{"date_heure":"2024-03-08T17:00","temperature_celsius":10.9,"temperature_ressentie":6.9,"temperature_proba":100,"precipitation":1.4},{"date_heure":"2024-03-08T18:00","temperature_celsius":11.6,"temperature_ressentie":5.7,"temperature_proba":100,"precipitation":0},{"date_heure":"2024-03-08T19:00","temperature_celsius":11.9,"temperature_ressentie":5.7,"temperature_proba":90,"precipitation":0},{"date_heure":"2024-03-08T20:00","temperature_celsius":11.4,"temperature_ressentie":4.6,"temperature_proba":81,"precipitation":0.5},{"date_heure":"2024-03-08T21:00","temperature_celsius":11.6,"temperature_ressentie":6.6,"temperature_proba":71,"precipitation":0.2},{"date_heure":"2024-03-08T22:00","temperature_celsius":11.6,"temperature_ressentie":6.5,"temperature_proba":66,"precipitation":0},{"date_heure":"2024-03-08T23:00","temperature_celsius":12.1,"temperature_ressentie":7.1,"temperature_proba":60,"precipitation":0},{"date_heure":"2024-03-09T00:00","temperature_celsius":11.9,"temperature_ressentie":6.9,"temperature_proba":55,"precipitation":0},{"date_heure":"2024-03-09T01:00","temperature_celsius":12.6,"temperature_ressentie":7.4,"temperature_proba":56,"precipitation":0},{"date_heure":"2024-03-09T02:00","temperature_celsius":12.8,"temperature_ressentie":7.3,"temperature_proba":57,"precipitation":0},{"date_heure":"2024-03-09T03:00","temperature_celsius":12.6,"temperature_ressentie":6.5,"temperature_proba":58,"precipitation":0},{"date_heure":"2024-03-09T04:00","temperature_celsius":12.4,"temperature_ressentie":7.4,"temperature_proba":55,"precipitation":0},{"date_heure":"2024-03-09T05:00","temperature_celsius":12.9,"temperature_ressentie":7.9,"temperature_proba":51,"precipitation":0},{"date_heure":"2024-03-09T06:00","temperature_celsius":13.1,"temperature_ressentie":8.3,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-09T07:00","temperature_celsius":13.6,"temperature_ressentie":8.2,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-09T08:00","temperature_celsius":13.6,"temperature_ressentie":7.8,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-09T09:00","temperature_celsius":13.8,"temperature_ressentie":7.6,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-09T10:00","temperature_celsius":13.9,"temperature_ressentie":7.1,"temperature_proba":64,"precipitation":0},{"date_heure":"2024-03-09T11:00","temperature_celsius":13.9,"temperature_ressentie":6.8,"temperature_proba":81,"precipitation":0},{"date_heure":"2024-03-09T12:00","temperature_celsius":13.9,"temperature_ressentie":6.3,"temperature_proba":97,"precipitation":0},{"date_heure":"2024-03-09T13:00","temperature_celsius":14.1,"temperature_ressentie":6.4,"temperature_proba":98,"precipitation":0},{"date_heure":"2024-03-09T14:00","temperature_celsius":13.7,"temperature_ressentie":6.4,"temperature_proba":99,"precipitation":1.9},{"date_heure":"2024-03-09T15:00","temperature_celsius":13.1,"temperature_ressentie":5.7,"temperature_proba":100,"precipitation":1.8},{"date_heure":"2024-03-09T16:00","temperature_celsius":13.1,"temperature_ressentie":5.4,"temperature_proba":100,"precipitation":6.1},{"date_heure":"2024-03-09T17:00","temperature_celsius":13,"temperature_ressentie":5,"temperature_proba":100,"precipitation":4.6},{"date_heure":"2024-03-09T18:00","temperature_celsius":13.4,"temperature_ressentie":5.4,"temperature_proba":100,"precipitation":5.6},{"date_heure":"2024-03-09T19:00","temperature_celsius":13.2,"temperature_ressentie":4.8,"temperature_proba":100,"precipitation":2.1},{"date_heure":"2024-03-09T20:00","temperature_celsius":13.4,"temperature_ressentie":5.8,"temperature_proba":100,"precipitation":6.5},{"date_heure":"2024-03-09T21:00","temperature_celsius":12.9,"temperature_ressentie":4,"temperature_proba":100,"precipitation":5.7},{"date_heure":"2024-03-09T22:00","temperature_celsius":13.2,"temperature_ressentie":4.4,"temperature_proba":99,"precipitation":4.6},{"date_heure":"2024-03-09T23:00","temperature_celsius":13.2,"temperature_ressentie":6.3,"temperature_proba":98,"precipitation":2.3},{"date_heure":"2024-03-10T00:00","temperature_celsius":13.5,"temperature_ressentie":8,"temperature_proba":97,"precipitation":4.4},{"date_heure":"2024-03-10T01:00","temperature_celsius":13.7,"temperature_ressentie":8.1,"temperature_proba":96,"precipitation":0.1},{"date_heure":"2024-03-10T02:00","temperature_celsius":13.1,"temperature_ressentie":9.2,"temperature_proba":95,"precipitation":0},{"date_heure":"2024-03-10T03:00","temperature_celsius":13.4,"temperature_ressentie":9.7,"temperature_proba":94,"precipitation":0},{"date_heure":"2024-03-10T04:00","temperature_celsius":13.6,"temperature_ressentie":9.7,"temperature_proba":83,"precipitation":0},{"date_heure":"2024-03-10T05:00","temperature_celsius":13.6,"temperature_ressentie":9.1,"temperature_proba":72,"precipitation":0},{"date_heure":"2024-03-10T06:00","temperature_celsius":13.4,"temperature_ressentie":8.7,"temperature_proba":61,"precipitation":0},{"date_heure":"2024-03-10T07:00","temperature_celsius":13.1,"temperature_ressentie":8.9,"temperature_proba":51,"precipitation":0},{"date_heure":"2024-03-10T08:00","temperature_celsius":13.1,"temperature_ressentie":8.7,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-10T09:00","temperature_celsius":13.2,"temperature_ressentie":9.3,"temperature_proba":32,"precipitation":0},{"date_heure":"2024-03-10T10:00","temperature_celsius":13.4,"temperature_ressentie":8.6,"temperature_proba":29,"precipitation":0},{"date_heure":"2024-03-10T11:00","temperature_celsius":13.6,"temperature_ressentie":8.5,"temperature_proba":26,"precipitation":0},{"date_heure":"2024-03-10T12:00","temperature_celsius":13.5,"temperature_ressentie":9.3,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-10T13:00","temperature_celsius":13.6,"temperature_ressentie":9.5,"temperature_proba":26,"precipitation":0},{"date_heure":"2024-03-10T14:00","temperature_celsius":13.6,"temperature_ressentie":9.7,"temperature_proba":29,"precipitation":0},{"date_heure":"2024-03-10T15:00","temperature_celsius":13.6,"temperature_ressentie":10.3,"temperature_proba":32,"precipitation":0},{"date_heure":"2024-03-10T16:00","temperature_celsius":13.8,"temperature_ressentie":10.3,"temperature_proba":40,"precipitation":0},{"date_heure":"2024-03-10T17:00","temperature_celsius":13.6,"temperature_ressentie":10.1,"temperature_proba":47,"precipitation":0},{"date_heure":"2024-03-10T18:00","temperature_celsius":13.6,"temperature_ressentie":10,"temperature_proba":55,"precipitation":0},{"date_heure":"2024-03-10T19:00","temperature_celsius":11,"temperature_ressentie":8.1,"temperature_proba":57,"precipitation":0},{"date_heure":"2024-03-10T20:00","temperature_celsius":11,"temperature_ressentie":7.8,"temperature_proba":59,"precipitation":0},{"date_heure":"2024-03-10T21:00","temperature_celsius":10.8,"temperature_ressentie":8,"temperature_proba":61,"precipitation":0},{"date_heure":"2024-03-10T22:00","temperature_celsius":10.7,"temperature_ressentie":8.6,"temperature_proba":60,"precipitation":0},{"date_heure":"2024-03-10T23:00","temperature_celsius":10,"temperature_ressentie":9,"temperature_proba":59,"precipitation":0},{"date_heure":"2024-03-11T00:00","temperature_celsius":9.6,"temperature_ressentie":8.2,"temperature_proba":58,"precipitation":0.1},{"date_heure":"2024-03-11T01:00","temperature_celsius":9.4,"temperature_ressentie":8.1,"temperature_proba":55,"precipitation":0},{"date_heure":"2024-03-11T02:00","temperature_celsius":9,"temperature_ressentie":7.9,"temperature_proba":51,"precipitation":0},{"date_heure":"2024-03-11T03:00","temperature_celsius":8.7,"temperature_ressentie":7.1,"temperature_proba":48,"precipitation":0},{"date_heure":"2024-03-11T04:00","temperature_celsius":8.8,"temperature_ressentie":7,"temperature_proba":45,"precipitation":0},{"date_heure":"2024-03-11T05:00","temperature_celsius":8.6,"temperature_ressentie":6.6,"temperature_proba":42,"precipitation":0},{"date_heure":"2024-03-11T06:00","temperature_celsius":8.7,"temperature_ressentie":6.3,"temperature_proba":39,"precipitation":0},{"date_heure":"2024-03-11T07:00","temperature_celsius":8.9,"temperature_ressentie":7,"temperature_proba":34,"precipitation":0},{"date_heure":"2024-03-11T08:00","temperature_celsius":9.4,"temperature_ressentie":7.8,"temperature_proba":28,"precipitation":0},{"date_heure":"2024-03-11T09:00","temperature_celsius":10.3,"temperature_ressentie":7.7,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T10:00","temperature_celsius":11.3,"temperature_ressentie":9.1,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T11:00","temperature_celsius":12.4,"temperature_ressentie":10.3,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T12:00","temperature_celsius":13,"temperature_ressentie":11.1,"temperature_proba":23,"precipitation":0},{"date_heure":"2024-03-11T13:00","temperature_celsius":13.3,"temperature_ressentie":11.3,"temperature_proba":21,"precipitation":0},{"date_heure":"2024-03-11T14:00","temperature_celsius":13.3,"temperature_ressentie":10.6,"temperature_proba":18,"precipitation":0.1},{"date_heure":"2024-03-11T15:00","temperature_celsius":13.4,"temperature_ressentie":10.1,"temperature_proba":16,"precipitation":0.1},{"date_heure":"2024-03-11T16:00","temperature_celsius":13.2,"temperature_ressentie":10,"temperature_proba":14,"precipitation":0},{"date_heure":"2024-03-11T17:00","temperature_celsius":12.5,"temperature_ressentie":9.3,"temperature_proba":12,"precipitation":0},{"date_heure":"2024-03-11T18:00","temperature_celsius":11.8,"temperature_ressentie":8.6,"temperature_proba":10,"precipitation":0},{"date_heure":"2024-03-11T19:00","temperature_celsius":11.5,"temperature_ressentie":7,"temperature_proba":9,"precipitation":0},{"date_heure":"2024-03-11T20:00","temperature_celsius":11.2,"temperature_ressentie":6.2,"temperature_proba":7,"precipitation":0},{"date_heure":"2024-03-11T21:00","temperature_celsius":10.9,"temperature_ressentie":6.1,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-11T22:00","temperature_celsius":10.7,"temperature_ressentie":5.7,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-11T23:00","temperature_celsius":10.3,"temperature_ressentie":5.4,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-12T00:00","temperature_celsius":9.9,"temperature_ressentie":5.4,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-12T01:00","temperature_celsius":9.6,"temperature_ressentie":5.6,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-12T02:00","temperature_celsius":9.4,"temperature_ressentie":5.8,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-12T03:00","temperature_celsius":9.2,"temperature_ressentie":5.6,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-12T04:00","temperature_celsius":8.8,"temperature_ressentie":5.5,"temperature_proba":2,"precipitation":0},{"date_heure":"2024-03-12T05:00","temperature_celsius":8.5,"temperature_ressentie":5,"temperature_proba":1,"precipitation":0},{"date_heure":"2024-03-12T06:00","temperature_celsius":8.4,"temperature_ressentie":4.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T07:00","temperature_celsius":8.4,"temperature_ressentie":4.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T08:00","temperature_celsius":8.8,"temperature_ressentie":5.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T09:00","temperature_celsius":9.9,"temperature_ressentie":6.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T10:00","temperature_celsius":11.1,"temperature_ressentie":7.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T11:00","temperature_celsius":12.1,"temperature_ressentie":9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T12:00","temperature_celsius":12.8,"temperature_ressentie":9.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T13:00","temperature_celsius":13,"temperature_ressentie":10.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T14:00","temperature_celsius":13.3,"temperature_ressentie":10.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T15:00","temperature_celsius":13.3,"temperature_ressentie":10.3,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T16:00","temperature_celsius":13.1,"temperature_ressentie":10.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T17:00","temperature_celsius":12.4,"temperature_ressentie":10.7,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T18:00","temperature_celsius":11.1,"temperature_ressentie":9.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T19:00","temperature_celsius":10.1,"temperature_ressentie":8.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T20:00","temperature_celsius":9.3,"temperature_ressentie":7.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T21:00","temperature_celsius":8.8,"temperature_ressentie":6.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T22:00","temperature_celsius":8.7,"temperature_ressentie":5.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-12T23:00","temperature_celsius":8.3,"temperature_ressentie":5.1,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T00:00","temperature_celsius":7.9,"temperature_ressentie":4.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T01:00","temperature_celsius":7.5,"temperature_ressentie":4.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T02:00","temperature_celsius":7.2,"temperature_ressentie":4.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T03:00","temperature_celsius":6.9,"temperature_ressentie":4.3,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T04:00","temperature_celsius":6.6,"temperature_ressentie":3.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T05:00","temperature_celsius":6.5,"temperature_ressentie":3.7,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T06:00","temperature_celsius":6.5,"temperature_ressentie":3.7,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T07:00","temperature_celsius":7,"temperature_ressentie":4.6,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T08:00","temperature_celsius":10,"temperature_ressentie":7.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T09:00","temperature_celsius":12.8,"temperature_ressentie":10.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T10:00","temperature_celsius":14.9,"temperature_ressentie":13.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T11:00","temperature_celsius":16.8,"temperature_ressentie":16.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T12:00","temperature_celsius":18,"temperature_ressentie":18.2,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T13:00","temperature_celsius":18.4,"temperature_ressentie":18,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T14:00","temperature_celsius":18.1,"temperature_ressentie":16.8,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T15:00","temperature_celsius":17.5,"temperature_ressentie":15.5,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T16:00","temperature_celsius":16.5,"temperature_ressentie":14.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T17:00","temperature_celsius":15.2,"temperature_ressentie":14.3,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T18:00","temperature_celsius":14,"temperature_ressentie":13.4,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T19:00","temperature_celsius":13.3,"temperature_ressentie":12.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T20:00","temperature_celsius":12.7,"temperature_ressentie":12.2,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T21:00","temperature_celsius":11.9,"temperature_ressentie":10.9,"temperature_proba":0,"precipitation":0},{"date_heure":"2024-03-13T22:00","temperature_celsius":10.4,"temperature_ressentie":9.1,"temperature_proba":1,"precipitation":0},{"date_heure":"2024-03-13T23:00","temperature_celsius":8.7,"temperature_ressentie":7,"temperature_proba":2,"precipitation":0},{"date_heure":"2024-03-14T00:00","temperature_celsius":7.3,"temperature_ressentie":5.4,"temperature_proba":3,"precipitation":0},{"date_heure":"2024-03-14T01:00","temperature_celsius":6.6,"temperature_ressentie":4.5,"temperature_proba":4,"precipitation":0},{"date_heure":"2024-03-14T02:00","temperature_celsius":6.3,"temperature_ressentie":4.1,"temperature_proba":5,"precipitation":0},{"date_heure":"2024-03-14T03:00","temperature_celsius":6,"temperature_ressentie":3.7,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T04:00","temperature_celsius":5.3,"temperature_ressentie":2.8,"temperature_proba":9,"precipitation":0},{"date_heure":"2024-03-14T05:00","temperature_celsius":4.6,"temperature_ressentie":1.9,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-14T06:00","temperature_celsius":4.9,"temperature_ressentie":2.3,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-14T07:00","temperature_celsius":7.2,"temperature_ressentie":5,"temperature_proba":17,"precipitation":0},{"date_heure":"2024-03-14T08:00","temperature_celsius":10.5,"temperature_ressentie":8.8,"temperature_proba":18,"precipitation":0},{"date_heure":"2024-03-14T09:00","temperature_celsius":13.2,"temperature_ressentie":11.8,"temperature_proba":19,"precipitation":0},{"date_heure":"2024-03-14T10:00","temperature_celsius":14.4,"temperature_ressentie":12.9,"temperature_proba":17,"precipitation":0},{"date_heure":"2024-03-14T11:00","temperature_celsius":15,"temperature_ressentie":13.3,"temperature_proba":15,"precipitation":0},{"date_heure":"2024-03-14T12:00","temperature_celsius":15.2,"temperature_ressentie":13.5,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-14T13:00","temperature_celsius":15.3,"temperature_ressentie":13.2,"temperature_proba":14,"precipitation":0},{"date_heure":"2024-03-14T14:00","temperature_celsius":15.1,"temperature_ressentie":12.4,"temperature_proba":15,"precipitation":0},{"date_heure":"2024-03-14T15:00","temperature_celsius":14.8,"temperature_ressentie":12.1,"temperature_proba":16,"precipitation":0},{"date_heure":"2024-03-14T16:00","temperature_celsius":14.3,"temperature_ressentie":12.1,"temperature_proba":13,"precipitation":0},{"date_heure":"2024-03-14T17:00","temperature_celsius":13.6,"temperature_ressentie":12.1,"temperature_proba":9,"precipitation":0},{"date_heure":"2024-03-14T18:00","temperature_celsius":12.9,"temperature_ressentie":11.9,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T19:00","temperature_celsius":12.1,"temperature_ressentie":11.5,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T20:00","temperature_celsius":11.4,"temperature_ressentie":10.7,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T21:00","temperature_celsius":10.8,"temperature_ressentie":9.9,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T22:00","temperature_celsius":10.6,"temperature_ressentie":9.6,"temperature_proba":6,"precipitation":0},{"date_heure":"2024-03-14T23:00","temperature_celsius":10.5,"temperature_ressentie":9.4,"temperature_proba":6,"precipitation":0}] </code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
