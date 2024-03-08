@@ -1,0 +1,10 @@
+---
+title: "Qui suis-je ?"
+image: 20231125_165112.jpg
+about:
+  template: jolla
+---
+
+Je suis Jasmine Dupau et bienvenue sur mon blog !
+
+Ce dernier a pour but de vous présenter toutes les manipulations vues en cours de R avancé lors de mon cursus M1 ECAP. Je n'en dis pas plus, je laisse place à votre curiosité. Alors n'attendez plus pour y jeter un coup d'oeil ;) !

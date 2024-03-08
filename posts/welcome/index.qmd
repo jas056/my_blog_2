@@ -1,0 +1,14 @@
+---
+title: "Bienvenue"
+author: "Jasmine Dupau"
+date: "2024-03-08"
+categories: [news]
+---
+
+Bonjour !
+
+Le site est constitué de deux blogs supplémentaires intitulés "Exercices" et "Utilisation d'un package via Github" qui reconstituent tout le travail effectué afin de découvrir et de mieux se familiariser avec Rstudio.
+
+A la lecture des blogs, vous aurez à disposition le code R que vous pourrez récupérer sur mon compte github .
+
+Bonne lecture !

@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mes projets",
+    "section": "",
+    "text": "Post With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nMar 8, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nBienvenue\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nMar 8, 2024\n\n\nJasmine Dupau\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Qui suis-je ?",
+    "section": "",
+    "text": "Je suis Jasmine Dupau et bienvenue sur mon blog !\nCe dernier a pour but de vous présenter toutes les manipulations vues en cours de R avancé lors de mon cursus M1 ECAP. Je n’en dis pas plus, je laisse place à votre curiosité. Alors n’attendez plus pour y jeter un coup d’oeil ;) !"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Bienvenue",
+    "section": "",
+    "text": "Bonjour !\nLe site est constitué de deux blogs supplémentaires intitulés “Exercices” et “Utilisation d’un package via Github” qui reconstituent tout le travail effectué afin de découvrir et de mieux se familiariser avec Rstudio.\nA la lecture des blogs, vous aurez à disposition le code R que vous pourrez récupérer sur mon compte github .\nBonne lecture !"
+  }
+]
