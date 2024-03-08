@@ -1,13 +1,57 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
+title: "Utilisation d'un package via Github"
+author: "Jasmine Dupau"
 date: "2024-03-08"
 categories: [news, code, analysis]
-image: "image.jpg"
 ---
 
-This is a post with executable code.
+## Librairie olympicWeather
+
+Le package olympicsWeather permet à l'utilisateur d'obtenir les prévisions météorologiques des sites olympiques comme la température ressentie et attendue ou encore les précipitations.\
+L'utilisateur a le choix entre entrer une adresse textuelle et écrire directement les coordonnées gps (latitude et longitude).\
+A la fin, l'utilisateur obtient un fichier json avec toutes les informations.
+
+### Installation de la librairie
+
+Pour installer la librairie, l'utilisateur doit avoir préalablement installé la librairie "remotes" puis installer le package olympicsWeather, relié à ma page github comme suit :
 
 ```{r}
-1 + 1
+#| warning: false
+#| eval: false
+#| message: false
+install.packages("remotes")
+remotes::install_github("https://github.com/jas056/olympicsWeather/tree/master")
+```
+
+## Prévisions
+
+Nous allons maintenant appliquer la fonction générique **get_weather_forecast** sur quelques exemples.
+
+### Stade de France
+
+```{r}
+#| warning: false
+#| eval: true
+#| message: false
+
+library(OlympicWeather)
+get_weather_forecast("Stade de France")
+```
+
+### Tahiti
+
+```{r}
+#| warning: false
+#| eval: true
+#| message: false
+get_weather_forecast("Tahiti")
+```
+
+### coordonnées GPS
+
+```{r}
+#| warning: false
+#| eval: true
+#| message: false
+get_weather_forecast(c(43.276703,5.334791))
 ```
