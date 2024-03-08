@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jasmine Dupau">
+<meta name="dcterms.date" content="2024-03-07">
+
+<title>Amusons-nous avec Rstudio ! - Exercices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Amusons-nous avec Rstudio !</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Qui suis-je ?</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Exercices</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jasmine Dupau </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 7, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="objectifs-du-travail" class="level1">
+<h1>Objectifs du travail</h1>
+<p>La réalisation des exercices a permis de pratiquer toutes les notions vues en cours de R avancé passant de la manipulation de données à la création d’un package (article dédié sur le blog).</p>
+<p>Chaque exercice va être présenter de la manière suivante :<br>
+– Questions précises<br>
+– Réponses avec le code et des commentaires pour faciliter la compréhension</p>
+<p>Tous les exercices ont été effectués à partir de bases de données centrées sur les jeux olympiques téléchargeables sur internet.</p>
+</section>
+<section id="exercice---semaine-1" class="level1">
+<h1>Exercice - semaine 1</h1>
+<p>Nous faisons appel aux différents packages nécessaires</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geosphere)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p>Lisez le fichier téléchargé avec la fonction <em>read.table</em>. Le résultat sera affecté à l’objet ayant pour nom data_ex. Le jeux de données contient 4 colonnes.<br>
+Quels sont les noms et la nature des colonnes ?<br>
+Combien de lignes contient la data.frame ?</p>
+<section id="etape-1-importation" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-importation">Etape 1 : Importation</h3>
+<p>Pour répondre à la question, nous importons tout d’abord le fichier CSV téléchargé qui se trouve dans le dossier data du projet Rstudio intitulé <em>exercices</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"C:/Users/Jasmine/Documents/Nantes/cours/SEMESTRE 2/R avancé/my_blog_2/posts/post-with-code/paris-2024-sites-olympiques-et-paralympiques-franciliens.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(path,<span class="at">sep =</span><span class="st">";"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data_ex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             geo_point                                             nom
+1  48.841319, 2.253076                                Parc des Princes
+2  48.924388, 2.359871                                 Stade de France
+3   48.92467, 2.332428                               Village olympique
+4   48.815115, 2.08208                           Château de Versailles
+5  48.944207, 2.424716                              Village des médias
+6  48.944643, 2.408258             Terrain des Essences - La Courneuve
+7  48.788162, 1.967776                             Colline d'Elancourt
+8  48.866041, 2.312406                                    Grand Palais
+9  48.862286, 2.313222                                       Invalides
+10 48.937188, 2.420467                      Site d'escalade du Bourget
+11   48.856262, 2.2914                                     Pont d'Iéna
+12 48.838649, 2.378496                                     Arena Bercy
+13 48.971314, 2.519183                                Arena Paris nord
+14 48.829624, 2.290777         Arena Paris Sud 6 (Porte de Versailles)
+15 48.865589, 2.321205                            Stade de la Concorde
+16 48.930873, 2.249836                            Stade Yves du Manoir
+17 48.854536, 2.300413                            Arena Champs de Mars
+18 48.857232, 2.296084                               Stade Tour Eiffel
+19 48.787261, 2.034736          Stade BMX de Saint-Quentin-en-Yvelines
+20 48.899483, 2.361803                               Arena La Chapelle
+21 48.835157, 2.257363                       Stade Pierre de Coubertin
+22 48.923457, 2.355527                                Centre aquatique
+23 48.832068, 2.284126         Arena Paris Sud 1 (Porte de Versailles)
+24 48.830231, 2.289126         Arena Paris Sud 4 (Porte de Versailles)
+25 48.856858, 2.351415                         Hôtel de ville de Paris
+26   48.89566, 2.22971                                La Défense Arena
+27 48.862229, 2.636374                                  Stade nautique
+28   48.751095, 2.0759                                   Golf national
+29 48.788046, 2.034987 Vélodrome National de Saint-Quentin-en-Yvelines
+30  48.84732, 2.245501                             Stade Roland Garros
+31 48.911184, 2.546395                                Clichy-sous-Bois
+     sites_olympiques_paralympiques
+1                    Site olympique
+2  Site olympique,Site paralympique
+3                                  
+4  Site olympique,Site paralympique
+5                                  
+6                 Site paralympique
+7                    Site olympique
+8  Site olympique,Site paralympique
+9  Site olympique,Site paralympique
+10                   Site olympique
+11                   Site olympique
+12 Site olympique,Site paralympique
+13 Site olympique,Site paralympique
+14 Site olympique,Site paralympique
+15                   Site olympique
+16                   Site olympique
+17 Site olympique,Site paralympique
+18 Site olympique,Site paralympique
+19                   Site olympique
+20 Site olympique,Site paralympique
+21                Site paralympique
+22                   Site olympique
+23 Site olympique,Site paralympique
+24 Site olympique,Site paralympique
+25                   Site olympique
+26 Site olympique,Site paralympique
+27 Site olympique,Site paralympique
+28                   Site olympique
+29 Site olympique,Site paralympique
+30 Site olympique,Site paralympique
+31                Site paralympique
+                                                             sports
+1                                                          Football
+2                                  Athlétisme,Para athlétisme,Rugby
+3                                                                  
+4               Sports équestres,Para équitation,Pentathlon moderne
+5                                                                  
+6                                                   Para athlétisme
+7                                                               VTT
+8                 Escrime,Escrime fauteuil,Taekwondo,Para taekwondo
+9        Tir à l'arc,Para tir à l'arc,Athlétisme,Cyclisme sur route
+10                                                Escalade sportive
+11                                    Cyclisme sur route,Athlétisme
+12     Basketball,Basket fauteuil,Gymnastique artistique,trampoline
+13                Boxe,Escrime,Pentathlon moderne,Volley-ball assis
+14                                  Haltérophilie,Handball,Goalball
+15                 Basketball 3x3,BMX freestyle,Breaking,Skateboard
+16                                                           Hockey
+17                              Judo,Para judo,Lutte,Rugby fauteuil
+18                                     Volleyball de plage,Cécifoot
+19                                                         BMX race
+20 Badminton,Para Badminton,Gymnastique rythmique,Para powerlifting
+21                                                         Goalball
+22                          Natation artistique,Plongeon,Water-polo
+23                                                Volleyball,Boccia
+24                             Tennis de table,Para tennis de table
+25                                                       Athlétisme
+26                                Natation,Para natation,Water-polo
+27                              Canoë,Para canoë,Aviron,Para aviron
+28                                                             Golf
+29                       Cyclisme sur piste,Para cyclisme sur piste
+30                                      Tennis,Tennis fauteuil,Boxe
+31                                          Para cyclisme sur route</code></pre>
+</div>
+</div>
+</section>
+<section id="etape-2-visualiser-la-base" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-visualiser-la-base">Etape 2 : Visualiser la base</h3>
+<p>Pour faciliter la lecture du jeu de données, nous décidons de le transformer en tibble pour avoir une meilleure organisation des informations disponibles.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(data_ex)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data_ex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 31 × 4
+   geo_point           nom                         sites_olympiques_par…¹ sports
+   &lt;chr&gt;               &lt;chr&gt;                       &lt;chr&gt;                  &lt;chr&gt; 
+ 1 48.841319, 2.253076 Parc des Princes            "Site olympique"       "Foot…
+ 2 48.924388, 2.359871 Stade de France             "Site olympique,Site … "Athl…
+ 3 48.92467, 2.332428  Village olympique           ""                     ""    
+ 4 48.815115, 2.08208  Château de Versailles       "Site olympique,Site … "Spor…
+ 5 48.944207, 2.424716 Village des médias          ""                     ""    
+ 6 48.944643, 2.408258 Terrain des Essences - La … "Site paralympique"    "Para…
+ 7 48.788162, 1.967776 Colline d'Elancourt         "Site olympique"       "VTT" 
+ 8 48.866041, 2.312406 Grand Palais                "Site olympique,Site … "Escr…
+ 9 48.862286, 2.313222 Invalides                   "Site olympique,Site … "Tir …
+10 48.937188, 2.420467 Site d'escalade du Bourget  "Site olympique"       "Esca…
+# ℹ 21 more rows
+# ℹ abbreviated name: ¹​sites_olympiques_paralympiques</code></pre>
+</div>
+</div>
+<p>Avec cet aperçu, nous pouvons voir que le tableau est constitué de 31 lignes et 4 colonnes s’intitulant respectivement <strong><em>geo_point</em></strong>, <strong><em>nom</em></strong> <strong><em>sites_olympiques_paralympiques</em></strong> et <strong><em>sports</em></strong>.<br>
+Elles sont toutes du type caractère.</p>
+<p>Autres méthodes pour obtenir ces informations :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "geo_point"                      "nom"                           
+[3] "sites_olympiques_paralympiques" "sports"                        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [31 × 4] (S3: tbl_df/tbl/data.frame)
+ $ geo_point                     : chr [1:31] "48.841319, 2.253076" "48.924388, 2.359871" "48.92467, 2.332428" "48.815115, 2.08208" ...
+ $ nom                           : chr [1:31] "Parc des Princes" "Stade de France" "Village olympique" "Château de Versailles" ...
+ $ sites_olympiques_paralympiques: chr [1:31] "Site olympique" "Site olympique,Site paralympique" "" "Site olympique,Site paralympique" ...
+ $ sports                        : chr [1:31] "Football" "Athlétisme,Para athlétisme,Rugby" "" "Sports équestres,Para équitation,Pentathlon moderne" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31  4</code></pre>
+</div>
+</div>
+</section>
+<section id="etape-finale-suppression-des-valeurs-manquantes" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-suppression-des-valeurs-manquantes">Etape finale : Suppression des valeurs manquantes</h3>
+<p>En regardant celui-ci, nous remarquons la présence de valeurs manquantes pour les lignes 3 et 5. Par conséquent, nous les supprimons pour éviter d’avoir des erreurs par la suite lors des manipulations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(data_ex)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data_ex <span class="ot">&lt;-</span> data_ex[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="questions-3-et-4" class="level2">
+<h2 class="anchored" data-anchor-id="questions-3-et-4">Questions 3 et 4</h2>
+<p>Combien y a t’il de sites olympiques ?<br>
+Combien y a t’il de sites paralympiques ?</p>
+<p>Pour répondre à ces questions, nous procédons à plusieurs étapes.</p>
+<section id="etape-1-création-de-variables" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-création-de-variables">Etape 1 : Création de variables</h3>
+<p>Au lieu de séparer notre colonne <strong><em>sites_olympiques_paralympiques</em></strong>, nous décidons de créer les variables suivantes :<br>
+– <strong><em>olympique</em></strong> qui ne prend uniquement en compte les sites olympiques.<br>
+– <strong><em>paralympique</em></strong> qui ne prend uniquement en compte les sites paralympiques.<br>
+– <strong><em>mixte</em></strong> qui prend en compte tous les sites.</p>
+<p>Pour ce faire, nous prenons une nouvelle version de la base initiale dans laquelle nous ajoutons les trois variables comme suit :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data_ex_1 <span class="ot">&lt;-</span> data_ex <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">olympique =</span> <span class="fu">ifelse</span>(sites_olympiques_paralympiques<span class="sc">==</span> <span class="st">"Site olympique"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">paralympique =</span> <span class="fu">ifelse</span>(sites_olympiques_paralympiques<span class="sc">==</span> <span class="st">"Site paralympique"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mixte =</span> <span class="fu">ifelse</span>(sites_olympiques_paralympiques <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Site olympique,Site paralympique"</span>), <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Chaque variable est binaire c’est-à-dire qu’elle prend seulement 2 valeurs : 1 pour “oui” et “0” pour non.</p>
+<p>Prenons comme exemple <strong><em>olympique</em></strong>, nous demandons l’ajout de la variable olympique dans le jeu de données initial prenant la valeur 1 si la cellule contient “Site Olympique” et 0 sinon.</p>
+</section>
+<section id="etape-2-compter" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-compter">Etape 2 : Compter</h3>
+<p>Une fois que la création est réalisée, nous comptons le nombre de 1 et de 0 pour chaque variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data_ex_1<span class="sc">$</span>olympique)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 0  1 
+19 10 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data_ex_1<span class="sc">$</span>paralympique)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 0  1 
+26  3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data_ex_1<span class="sc">$</span>mixte)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 0  1 
+13 16 </code></pre>
+</div>
+</div>
+<p>Sur les 29 sites présents, il y a 10 sites olympiques, 3 sites paralympiques et 16 sites mixtes.</p>
+</section>
+<section id="etape-finale-suppression-de-la-colonne-sites_olympiques_paralympiques" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-suppression-de-la-colonne-sites_olympiques_paralympiques">Etape finale : Suppression de la colonne “sites_olympiques_paralympiques”</h3>
+<p>Pour la suite du travail, nous prenons comme base data_ex_1 et nous supprimons par conséquent la colonne puisque les 3 colonnes créées sont plus faciles à manipuler.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data_ex_1 <span class="ot">&lt;-</span> data_ex_1[,<span class="sc">-</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="question-5" class="level2">
+<h2 class="anchored" data-anchor-id="question-5">Question 5</h2>
+<p>Quels sont les sites qui accueillent plusieurs disciplines sportives ?</p>
+<p>La colonne <strong><em>sports</em></strong> est du même type que la colonne <strong><em>sites_olympiques_paralympiques</em></strong>.<br>
+Par conséquent, il faut avoir recours au même raisonnment pour y répondre.</p>
+<section id="etape-1-création-de-la-variable-nb_disciplines-et-compter" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-création-de-la-variable-nb_disciplines-et-compter">Etape 1 : Création de la variable nb_disciplines et compter</h3>
+<p>Cette variable est construite de sorte que si la cellule ne contient pas de virgule alors cela signifie qu’il y a seulement une discipline. Elle prend donc la valeur “une discipline” et “plusieurs disciplines” sinon.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data_ex_2 <span class="ot">&lt;-</span> data_ex_1 <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">nb_disciplines =</span> <span class="fu">ifelse</span>(stringr<span class="sc">::</span><span class="fu">str_count</span>(sports,<span class="st">","</span>)<span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Une discipline"</span>, <span class="st">"Plusieurs disciplines"</span>))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data_ex_2<span class="sc">$</span>nb_disciplines)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Plusieurs disciplines        Une discipline 
+                   19                    10 </code></pre>
+</div>
+</div>
+<p>Il y a au total 19 sites qui accueillent plusieurs disciplines sportives.</p>
+</section>
+<section id="etape-finale-identification-des-sites" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-identification-des-sites">Etape finale : Identification des sites</h3>
+<p>Pour les identifier, nous filtrons la table sur plusieurs disciplines et nous demandons à ce que la colonne “nom” s’affiche pour obtenir les noms de ces sites :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data_ex_2 <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(nb_disciplines <span class="sc">==</span> <span class="st">"Plusieurs disciplines"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(nom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 1
+   nom                                            
+   &lt;chr&gt;                                          
+ 1 Stade de France                                
+ 2 Château de Versailles                          
+ 3 Grand Palais                                   
+ 4 Invalides                                      
+ 5 Pont d'Iéna                                    
+ 6 Arena Bercy                                    
+ 7 Arena Paris nord                               
+ 8 Arena Paris Sud 6 (Porte de Versailles)        
+ 9 Stade de la Concorde                           
+10 Arena Champs de Mars                           
+11 Stade Tour Eiffel                              
+12 Arena La Chapelle                              
+13 Centre aquatique                               
+14 Arena Paris Sud 1 (Porte de Versailles)        
+15 Arena Paris Sud 4 (Porte de Versailles)        
+16 La Défense Arena                               
+17 Stade nautique                                 
+18 Vélodrome National de Saint-Quentin-en-Yvelines
+19 Stade Roland Garros                            </code></pre>
+</div>
+</div>
+<p>Nous avons maintenant à disposition tous les sites accueillant plusieurs disciplines sportives.</p>
+</section>
+</section>
+<section id="question-6" class="level2">
+<h2 class="anchored" data-anchor-id="question-6">Question 6</h2>
+<p>Quels sont les disciplines para-olympiques accueillies dans ces sites franciliens ?</p>
+<section id="etape-1-filtrer-et-afficher-les-disciplines-paralympiques" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-filtrer-et-afficher-les-disciplines-paralympiques">Etape 1 : Filtrer et afficher les disciplines paralympiques</h3>
+<p>Pour répondre à la question, nous filtrons tout d’abord la table sur les sites paralympiques et mixtes ainsi que sur les caractères faisant référence aux sports paralympiques. Puis, nous demandons à ce que les sports s’affichent en incluant les résultats dans un nouvel objet. Pour ce faire, nous faisons appel à la fonction <em>grepl</em> pour les caractères comme suit :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>disciplines_para <span class="ot">&lt;-</span> data_ex_2 <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((paralympique <span class="sc">|</span> mixte) <span class="sc">&amp;</span> (<span class="fu">grepl</span>(<span class="st">"Para"</span>, sports) <span class="sc">|</span> <span class="fu">grepl</span>(<span class="st">"fauteuil"</span>, sports) <span class="sc">|</span> <span class="fu">grepl</span>(<span class="st">"Goalball"</span>, sports) <span class="sc">|</span> <span class="fu">grepl</span>(<span class="st">"Cécifoot"</span>, sports))) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sports)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>disciplines_para</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 1
+   sports                                                          
+   &lt;chr&gt;                                                           
+ 1 Athlétisme,Para athlétisme,Rugby                                
+ 2 Sports équestres,Para équitation,Pentathlon moderne             
+ 3 Para athlétisme                                                 
+ 4 Escrime,Escrime fauteuil,Taekwondo,Para taekwondo               
+ 5 Tir à l'arc,Para tir à l'arc,Athlétisme,Cyclisme sur route      
+ 6 Basketball,Basket fauteuil,Gymnastique artistique,trampoline    
+ 7 Haltérophilie,Handball,Goalball                                 
+ 8 Judo,Para judo,Lutte,Rugby fauteuil                             
+ 9 Volleyball de plage,Cécifoot                                    
+10 Badminton,Para Badminton,Gymnastique rythmique,Para powerlifting
+11 Goalball                                                        
+12 Tennis de table,Para tennis de table                            
+13 Natation,Para natation,Water-polo                               
+14 Canoë,Para canoë,Aviron,Para aviron                             
+15 Cyclisme sur piste,Para cyclisme sur piste                      
+16 Tennis,Tennis fauteuil,Boxe                                     
+17 Para cyclisme sur route                                         </code></pre>
+</div>
+</div>
+<p>Cependant, nous retrouvons également des disciplines non paralympiques, d’où la nécessite de réaliser l’étape suivante.</p>
+</section>
+<section id="etape-finale-séparation-de-la-colonne-sports-et-identification" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-séparation-de-la-colonne-sports-et-identification">Etape finale : Séparation de la colonne “sports” et identification</h3>
+<p>Une fois l’étape 1 réalisée, nous séparons la colonne contenant le nom des sports et nous affichons toutes les disciplines paralympiques du jeu de données.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>disciplines_para_1 <span class="ot">&lt;-</span> disciplines_para <span class="sc">|&gt;</span>  </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(sports, <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>disciplines_para_1 <span class="sc">|&gt;</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (<span class="fu">grepl</span>(<span class="st">"Para"</span>, sports) <span class="sc">|</span> <span class="fu">grepl</span>(<span class="st">"fauteuil"</span>,sports) <span class="sc">|</span> <span class="fu">grepl</span>(<span class="st">"Goalball"</span>,sports))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 1
+   sports                 
+   &lt;chr&gt;                  
+ 1 Para athlétisme        
+ 2 Para équitation        
+ 3 Para athlétisme        
+ 4 Escrime fauteuil       
+ 5 Para taekwondo         
+ 6 Para tir à l'arc       
+ 7 Basket fauteuil        
+ 8 Goalball               
+ 9 Para judo              
+10 Rugby fauteuil         
+11 Para Badminton         
+12 Para powerlifting      
+13 Goalball               
+14 Para tennis de table   
+15 Para natation          
+16 Para canoë             
+17 Para aviron            
+18 Para cyclisme sur piste
+19 Tennis fauteuil        
+20 Para cyclisme sur route</code></pre>
+</div>
+</div>
+<p>Il y a maintenant uniquement l’affichage des sports paralympiques.</p>
+</section>
+</section>
+<section id="question-7" class="level2">
+<h2 class="anchored" data-anchor-id="question-7">Question 7</h2>
+<p>Quel(s) site(s) accueille(nt) le plus de disciplines différentes ?</p>
+<p>Pour y répondre, nous repartons avec la base de données data_ex_2.</p>
+<section id="etape-1-séparer-la-colonne-sports" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-séparer-la-colonne-sports">Etape 1 : Séparer la colonne “sports”</h3>
+<p>Les disciplines sont séparées par une virgule dans chaque cellule de la colonne <strong><em>sports</em></strong>. Par conséquent, nous décidons de la décomposer afin d’obtenir tous les sports de manière individuelle.</p>
+<p>Pour comprendre le processus, lorsqu’une cellule dispose de 4 disciplines différentes séparées par une virgule, le logiciel va créer 4 colonnes.</p>
+<p>Pour avoir des dimensions homogènes, le logiciel affiche 4 fois le même sport lorsqu’il n’y a qu’une seule discipline comme suit :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sports_modif<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="fu">do.call</span>(<span class="st">"rbind"</span>, </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">strsplit</span>(<span class="fu">as.character</span>(data_ex_2<span class="sc">$</span>sports),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">","</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>sports_modif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        X1                      X2                      X3
+1                 Football                Football                Football
+2               Athlétisme         Para athlétisme                   Rugby
+3         Sports équestres         Para équitation      Pentathlon moderne
+4          Para athlétisme         Para athlétisme         Para athlétisme
+5                      VTT                     VTT                     VTT
+6                  Escrime        Escrime fauteuil               Taekwondo
+7              Tir à l'arc        Para tir à l'arc              Athlétisme
+8        Escalade sportive       Escalade sportive       Escalade sportive
+9       Cyclisme sur route              Athlétisme      Cyclisme sur route
+10              Basketball         Basket fauteuil  Gymnastique artistique
+11                    Boxe                 Escrime      Pentathlon moderne
+12           Haltérophilie                Handball                Goalball
+13          Basketball 3x3           BMX freestyle                Breaking
+14                  Hockey                  Hockey                  Hockey
+15                    Judo               Para judo                   Lutte
+16     Volleyball de plage                Cécifoot     Volleyball de plage
+17                BMX race                BMX race                BMX race
+18               Badminton          Para Badminton   Gymnastique rythmique
+19                Goalball                Goalball                Goalball
+20     Natation artistique                Plongeon              Water-polo
+21              Volleyball                  Boccia              Volleyball
+22         Tennis de table    Para tennis de table         Tennis de table
+23              Athlétisme              Athlétisme              Athlétisme
+24                Natation           Para natation              Water-polo
+25                   Canoë              Para canoë                  Aviron
+26                    Golf                    Golf                    Golf
+27      Cyclisme sur piste Para cyclisme sur piste      Cyclisme sur piste
+28                  Tennis         Tennis fauteuil                    Boxe
+29 Para cyclisme sur route Para cyclisme sur route Para cyclisme sur route
+                        X4
+1                 Football
+2               Athlétisme
+3         Sports équestres
+4          Para athlétisme
+5                      VTT
+6           Para taekwondo
+7       Cyclisme sur route
+8        Escalade sportive
+9               Athlétisme
+10              trampoline
+11       Volley-ball assis
+12           Haltérophilie
+13              Skateboard
+14                  Hockey
+15          Rugby fauteuil
+16                Cécifoot
+17                BMX race
+18       Para powerlifting
+19                Goalball
+20     Natation artistique
+21                  Boccia
+22    Para tennis de table
+23              Athlétisme
+24                Natation
+25             Para aviron
+26                    Golf
+27 Para cyclisme sur piste
+28                  Tennis
+29 Para cyclisme sur route</code></pre>
+</div>
+</div>
+</section>
+<section id="etape-finale-inclure-les-4-colonnes-de-sports_modif-et-tri" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-inclure-les-4-colonnes-de-sports_modif-et-tri">Etape finale : Inclure les 4 colonnes de sports_modif et tri</h3>
+<p>Nous incluons les colonnes <strong><em>X1, X2, X3 et X4</em></strong> induites de l’étape précédente. Ensuite, nous regroupons par nom et nous calculons le nombre de disciplines différentes pour chaque site.</p>
+<p>Puis, nous finissons par ranger par ordre décroissant le nombre de disciplines :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data_ex_2<span class="ot">&lt;-</span> <span class="fu">cbind</span>(data_ex_2, sports_modif)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>classement <span class="ot">&lt;-</span> data_ex_2<span class="sc">|&gt;</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(nom) <span class="sc">|&gt;</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">nbre_sports =</span> <span class="fu">n_distinct</span>((<span class="fu">c</span>(X1, X2, X3, X4)))) <span class="sc">|&gt;</span> </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(nbre_sports))</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>classement</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 29 × 2
+   nom                                     nbre_sports
+   &lt;chr&gt;                                         &lt;int&gt;
+ 1 Arena Bercy                                       4
+ 2 Arena Champs de Mars                              4
+ 3 Arena La Chapelle                                 4
+ 4 Arena Paris nord                                  4
+ 5 Grand Palais                                      4
+ 6 Invalides                                         4
+ 7 Stade de la Concorde                              4
+ 8 Stade nautique                                    4
+ 9 Arena Paris Sud 6 (Porte de Versailles)           3
+10 Centre aquatique                                  3
+# ℹ 19 more rows</code></pre>
+</div>
+</div>
+<p>L’offre maximale de disciplines différentes est au nombre de 4.<br>
+Arena Brecy fait partie des sites proposant cette offre.</p>
+</section>
+</section>
+<section id="question-8" class="level2">
+<h2 class="anchored" data-anchor-id="question-8">Question 8</h2>
+<p>Quelle discipline aura lieu sur le plus grand nombre de sites ? Quels sont ces sites ?</p>
+<p>Pour y répondre, nous allons chercher la discipline qui revient le plus souvent et identifier les sites qui accueillent cette dernière.</p>
+<section id="etape-1-avoir-le-nom-de-chaque-disicipline-et-trier-par-ordre-décroissant" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-avoir-le-nom-de-chaque-disicipline-et-trier-par-ordre-décroissant">Etape 1 : Avoir le nom de chaque disicipline et trier par ordre décroissant</h3>
+<p>Nous utilisons le même raisonnement que précédemment mais nous faisons appel cette fois-ci à la fonction <em>separate_rows</em> car le logiciel ne va pas remplir la case avec le premier sport lorsque le site a moins de 4 sports. En effet, si nous faisions appel à la fonction <em>str_split</em>, l’occurrence des sports serait biaisée.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>data_ex_3 <span class="ot">&lt;-</span> data_ex<span class="sc">|&gt;</span> <span class="fu">separate_rows</span>(sports, <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>data_ex_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 70 × 4
+   geo_point           nom                         sites_olympiques_par…¹ sports
+   &lt;chr&gt;               &lt;chr&gt;                       &lt;chr&gt;                  &lt;chr&gt; 
+ 1 48.841319, 2.253076 Parc des Princes            Site olympique         Footb…
+ 2 48.924388, 2.359871 Stade de France             Site olympique,Site p… Athlé…
+ 3 48.924388, 2.359871 Stade de France             Site olympique,Site p… Para …
+ 4 48.924388, 2.359871 Stade de France             Site olympique,Site p… Rugby 
+ 5 48.815115, 2.08208  Château de Versailles       Site olympique,Site p… Sport…
+ 6 48.815115, 2.08208  Château de Versailles       Site olympique,Site p… Para …
+ 7 48.815115, 2.08208  Château de Versailles       Site olympique,Site p… Penta…
+ 8 48.944643, 2.408258 Terrain des Essences - La … Site paralympique      Para …
+ 9 48.788162, 1.967776 Colline d'Elancourt         Site olympique         VTT   
+10 48.866041, 2.312406 Grand Palais                Site olympique,Site p… Escri…
+# ℹ 60 more rows
+# ℹ abbreviated name: ¹​sites_olympiques_paralympiques</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>apparitions <span class="ot">&lt;-</span> <span class="fu">table</span>(data_ex_3<span class="sc">$</span>sports)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(apparitions, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+             Athlétisme                    Boxe      Cyclisme sur route 
+                      4                       2                       2 
+                Escrime                Goalball         Para athlétisme 
+                      2                       2                       2 
+     Pentathlon moderne              Water-polo                  Aviron 
+                      2                       2                       1 
+              Badminton         Basket fauteuil              Basketball 
+                      1                       1                       1 
+         Basketball 3x3           BMX freestyle                BMX race 
+                      1                       1                       1 
+                 Boccia                Breaking                   Canoë 
+                      1                       1                       1 
+               Cécifoot      Cyclisme sur piste       Escalade sportive 
+                      1                       1                       1 
+       Escrime fauteuil                Football                    Golf 
+                      1                       1                       1 
+ Gymnastique artistique   Gymnastique rythmique           Haltérophilie 
+                      1                       1                       1 
+               Handball                  Hockey                    Judo 
+                      1                       1                       1 
+                  Lutte                Natation     Natation artistique 
+                      1                       1                       1 
+            Para aviron          Para Badminton              Para canoë 
+                      1                       1                       1 
+Para cyclisme sur piste Para cyclisme sur route         Para équitation 
+                      1                       1                       1 
+              Para judo           Para natation       Para powerlifting 
+                      1                       1                       1 
+         Para taekwondo    Para tennis de table        Para tir à l'arc 
+                      1                       1                       1 
+               Plongeon                   Rugby          Rugby fauteuil 
+                      1                       1                       1 
+             Skateboard        Sports équestres               Taekwondo 
+                      1                       1                       1 
+                 Tennis         Tennis de table         Tennis fauteuil 
+                      1                       1                       1 
+            Tir à l'arc              trampoline       Volley-ball assis 
+                      1                       1                       1 
+             Volleyball     Volleyball de plage                     VTT 
+                      1                       1                       1 </code></pre>
+</div>
+</div>
+<p>L’athlétisme est la discipline la plus récurrente avec 6 apparitions dont 2 en para.</p>
+</section>
+<section id="etape-finale-identification-des-sites-1" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-identification-des-sites-1">Etape finale : Identification des sites</h3>
+<p>Il ne reste plus qu’à filtrer sur les mots “Athlétisme” et “athlétisme” pour obtenir tous les sites ayant au moins ces disciplines :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data_ex_3<span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Athlétisme"</span>,sports)<span class="sc">|</span><span class="fu">grepl</span>(<span class="st">"athlétisme"</span>,sports)) <span class="sc">|&gt;</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nom, sports)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  nom                                 sports         
+  &lt;chr&gt;                               &lt;chr&gt;          
+1 Stade de France                     Athlétisme     
+2 Stade de France                     Para athlétisme
+3 Terrain des Essences - La Courneuve Para athlétisme
+4 Invalides                           Athlétisme     
+5 Pont d'Iéna                         Athlétisme     
+6 Hôtel de ville de Paris             Athlétisme     </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="question-9---non-résolue" class="level2">
+<h2 class="anchored" data-anchor-id="question-9---non-résolue">Question 9 - non résolue</h2>
+<section id="etape-1-récupérer-coordonnées-gps-séparément" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-récupérer-coordonnées-gps-séparément">Etape 1 : Récupérer coordonnées GPS séparément</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>data_ex_4 <span class="ot">&lt;-</span> data_ex <span class="sc">|&gt;</span> <span class="fu">separate</span>(geo_point, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"lon"</span>,<span class="st">"lat"</span>),<span class="at">sep =</span> <span class="st">", "</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>localisation <span class="ot">&lt;-</span> data_ex_4[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co">#ne prendre que les colonnes "nom", "lon" et "lat"</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(localisation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [29 × 3] (S3: tbl_df/tbl/data.frame)
+ $ lon: chr [1:29] "48.841319" "48.924388" "48.815115" "48.944643" ...
+ $ lat: chr [1:29] "2.253076" "2.359871" "2.08208" "2.408258" ...
+ $ nom: chr [1:29] "Parc des Princes" "Stade de France" "Château de Versailles" "Terrain des Essences - La Courneuve" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Convertir en numérique</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>localisation<span class="sc">$</span>lon <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(localisation<span class="sc">$</span>lon)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>localisation<span class="sc">$</span>lat <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(localisation<span class="sc">$</span>lat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="etape-2-calculer-les-distances" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-calculer-les-distances">Etape 2 : calculer les distances</h3>
+<p>La fonction <em>distHaversine</em> permet de calculer la plus petite distance entre 2 points.<br>
+Ici, nous calculons les distances à l’aide de la longitude et de la latitude :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> <span class="fu">distHaversine</span>(localisation[,<span class="fu">c</span>(<span class="st">"lon"</span>, <span class="st">"lat"</span>)])</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>distance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 15056.7389 33226.6717 39064.0691 52032.1736 39330.0598   427.4280
+ [7] 14557.8613 16954.3051  9891.4218 21516.8494 29913.6785  5241.7774
+[13] 10763.3665 10188.1278   567.5872 30116.3397 38489.5146 13651.4314
+[19] 14692.6679 12903.6370   592.9181  7539.9991 14218.9884 45422.0657
+[25] 63604.3467  6135.2023 24344.2892 34240.2309</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="exercice---semaine-2" class="level1">
+<h1>Exercice - semaine 2</h1>
+<p>Nous faisons appel aux différents packages nécessaires</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<p>Lancez la commande suivante<br>
+Que s’est-il passé ? Que contient l’objet list_tables ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>list_tables <span class="ot">&lt;-</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">session</span>(<span class="st">"https://fr.wikipedia.org/wiki/Liste_des_m%C3%A9daill%C3%A9s_olympiques"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="st">".wikitable"</span>) <span class="sc">|&gt;</span> <span class="co">#permet de sélectionner les éléments du document HTML </span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>() <span class="co">#renvoie un tableau</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cette commande renvoie la liste de tous les médaillés olympiques depuis 1896, disponible sur wikipédia que nous incorporons dans l’objet list_table.<br>
+Ce dernier est une liste de 6 listes, étant chacune un tibble.</p>
+</section>
+<section id="question-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-1">Question 2</h2>
+<p>Nous allons tout d’abord nous intéresser à la première table.</p>
+<p>Créez un objet intitulé data_medailles_sport_ete contenant le premier élément de list_tables.</p>
+<p>La table n’est pas bien formattée.<br>
+Supprimez la première colonne, les noms de colonnes et la première ligne. Renommez les colonnes en c(“Discipline”, “Annees”, “Editions”, “Epreuves_2020”, “Or”, “Argent”, “Bronze”, “Total”, “Athletes_medailles”, “Athletes_or”).</p>
+<p>Les colonnes <strong><em>Editions, Epreuves_2020, Or, Argent, Bronze, Total</em></strong> seront converties en colonnes d’entiers.</p>
+<section id="etape-1-extraction-de-la-première-liste-de-la-liste" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-extraction-de-la-première-liste-de-la-liste">Etape 1 : Extraction de la première liste de la liste</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>data_medailles_sport_ete <span class="ot">&lt;-</span> list_tables[[<span class="dv">1</span>]]</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>data_medailles_sport_ete</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 31 × 11
+   Discipline   Discipline   Années `Nombre de` `Nombre de` `médailles décernés`
+   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;               
+ 1 "Discipline" Discipline   Années Éditions    Épreuves(e… Or                  
+ 2 ""           Athlétisme   Depui… 29          48          1028                
+ 3 ""           Aviron       Depui… 28          14          269                 
+ 4 ""           Badminton    Depui… 8           5           39                  
+ 5 ""           Basket-ball  Depui… 20          4           32                  
+ 6 ""           Boxe         1904,… 26          13          266                 
+ 7 ""           Canoë-kayak  Depui… 20          16          242                 
+ 8 ""           Cyclisme(ho… Depui… 29          22          263                 
+ 9 ""           Équitation   1900,… 26          6           151                 
+10 ""           Escrime      Depui… 29          12          223                 
+# ℹ 21 more rows
+# ℹ 5 more variables: `médailles décernés` &lt;chr&gt;, `médailles décernés` &lt;chr&gt;,
+#   `médailles décernés` &lt;chr&gt;,
+#   `Athlète(s) avec le plus de médailles (Or-Argent-Bronze)` &lt;chr&gt;,
+#   `Athlète(s) avec le plus de médailles d'or` &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="etape-2-manipulations-sur-cette-sous-liste" class="level2">
+<h2 class="anchored" data-anchor-id="etape-2-manipulations-sur-cette-sous-liste">Etape 2 : Manipulations sur cette sous-liste</h2>
+<p>Nous allons réaliser plusieurs manipulations :<br>
+– Suppression de la première colonne<br>
+– Suppression de la première ligne<br>
+– Renommer les colonnes<br>
+– Mettre en entiers <strong><em>Editions</em></strong>, <strong><em>Epreuves_2020</em></strong>, <strong><em>Or</em></strong>, <strong><em>Argent</em></strong>, <strong><em>Bronze</em></strong> et <strong><em>Total</em></strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data_medailles_sport_ete <span class="ot">&lt;-</span> data_medailles_sport_ete[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>data_medailles_sport_ete <span class="ot">&lt;-</span> data_medailles_sport_ete[<span class="sc">-</span><span class="dv">1</span>, ]</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_medailles_sport_ete) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Discipline"</span>, <span class="st">"Annees"</span>, <span class="st">"Editions"</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Epreuves_2020"</span>, <span class="st">"Or"</span>, <span class="st">"Argent"</span>, <span class="st">"Bronze"</span>,</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Total"</span>, <span class="st">"Athletes_medailles"</span>,</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Athletes_or"</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>data_medailles_sport_ete[, <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>)] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data_medailles_sport_ete[, <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>)], as.integer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="etape-finale-vérifier-le-type-des-variables" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-vérifier-le-type-des-variables">Etape finale : Vérifier le type des variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_medailles_sport_ete)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [30 × 10] (S3: tbl_df/tbl/data.frame)
+ $ Discipline        : chr [1:30] "Athlétisme" "Aviron" "Badminton" "Basket-ball" ...
+ $ Annees            : chr [1:30] "Depuis 1896" "Depuis 1900" "Depuis 1992" "Depuis 1936" ...
+ $ Editions          : int [1:30] 29 28 8 20 26 20 29 26 29 27 ...
+ $ Epreuves_2020     : int [1:30] 48 14 5 4 13 16 22 6 12 2 ...
+ $ Or                : int [1:30] 1028 269 39 32 266 242 263 151 223 34 ...
+ $ Argent            : int [1:30] 1030 268 39 32 266 241 261 149 223 34 ...
+ $ Bronze            : int [1:30] 1027 273 43 32 472 243 260 148 221 35 ...
+ $ Total             : int [1:30] 3085 810 121 96 1004 726 784 448 667 103 ...
+ $ Athletes_medailles: chr [1:30] "Paavo Nurmi (FIN) (9-3-0)" "Elisabeta Lipă (ROU) (5-2-1)" "Gao Ling (CHN) (2-1-1)" "Teresa Edwards (USA) (4-0-1)" ...
+ $ Athletes_or       : chr [1:30] "Paavo Nurmi (FIN) (9-3-0) Carl Lewis (USA) (9-1-0)" "Elisabeta Lipă (ROU) (5-2-1) Georgeta Damian (ROU) (5-0-1) Steven Redgrave (GBR) (5-0-1)" "Gao Ling (CHN) (2-1-1) Kim Dong-moon (KOR) (2-0-1) Zhang Nan (CHN) (2-0-1) Ge Fei (CHN) (2-0-0) Gu Jun (CHN) (2"| __truncated__ "Teresa Edwards (USA) (4-0-1) Sue Bird (USA) (4-0-0) Tamika Catchings (USA) (4-0-0) Lisa Leslie (USA) (4-0-0) Di"| __truncated__ ...</code></pre>
+</div>
+</div>
+<p>Maintenant que le nettoyage et le formatage sont réalisés, le jeu de données est prêt pour l’analyse.</p>
+</section>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<p>Quelles sont les 3 disciplines avec le plus de médailles distribuées depuis le début de l’histoire des jeux olympiques ?</p>
+<p>Pour faire le top 3 des disciplines ayant le plus de médaillés, nous faisons appel à la fonction <em>slice_max</em> de <strong>dplyr</strong> qui permet ici de sélectionner les trois lignes ayant les trois meilleurs totaux de médailles.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>data_medailles_sport_ete <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">slice_max</span>(Total, <span class="at">n=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 10
+  Discipline             Annees Editions Epreuves_2020    Or Argent Bronze Total
+  &lt;chr&gt;                  &lt;chr&gt;     &lt;int&gt;         &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;
+1 Athlétisme             Depui…       29            48  1028   1030   1027  3085
+2 Natation(hommes, femm… Depui…       29            37   607    604    603  1814
+3 Lutte                  1896,…       28            18   430    429    499  1358
+# ℹ 2 more variables: Athletes_medailles &lt;chr&gt;, Athletes_or &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>L’athlétisme, la natation et la lutte sont les disciplines ayant eu le plus de médaillés.</p>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<p>Quelles sont les 6 disciplines avec le moins d’épreuves en 2020 ?</p>
+<p>Même raisonnement mais à l’inverse. Par conséquent, nous utilisons la fonction <em>slice_min</em> qui permet de sélectionner les 6 sports ayant eu le moins d’épreuves en 2020.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>data_medailles_sport_ete <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">slice_min</span>(Epreuves_2020, <span class="at">n=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 10
+  Discipline            Annees  Editions Epreuves_2020    Or Argent Bronze Total
+  &lt;chr&gt;                 &lt;chr&gt;      &lt;int&gt;         &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;
+1 Football              1900–1…       27             2    34     34     35   103
+2 Golf                  1900–1…        4             2     8      8      9    19
+3 Handball              1936,d…       14             2    26     26     26    78
+4 Hockey sur gazon      1908, …       24             2    35     35     36   106
+5 Natation synchronisée Depuis…       10             2    20     18     19    57
+6 Pentathlon moderne    Depuis…       25             2    42     42     42   126
+7 Volley-ball           Depuis…       15             2    30     30     30    90
+8 Water polo            1900,d…       26             2    28     28     29    85
+# ℹ 2 more variables: Athletes_medailles &lt;chr&gt;, Athletes_or &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Les disciplines ayant comptabilisé au plus 2 épreuves sont au nombre de 8.</p>
+</section>
+<section id="question-5---non-résolue" class="level2">
+<h2 class="anchored" data-anchor-id="question-5---non-résolue">Question 5 - non résolue</h2>
+<p>La colonne <strong><em>Editions</em></strong> nous renseigne sur le nombre total d’apparence des disciplines aux JO d’été.<br>
+Nous souhaitons vérifier ce calcul en implémentant notre propre fonction <em>calcul_nb_editions_int</em>.<br>
+Dans un premier temps, la fonction <em>calcul_nb_editions</em> prendra en entrée un paramètre depuis, de type entier, qui représente depuis quelle année la discipline est au programme.</p>
+<section id="etape-1-se-familiariser-avec-la-colonne-annees" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-se-familiariser-avec-la-colonne-annees">Etape 1 : Se familiariser avec la colonne Annees</h3>
+<p>Avant de construire une fonction impliquant des paramètres issus de la base de données, il est nécessaire de comprendre la logique en se focalisant sur la colonne qui permet de définir la fonction, ici : <strong><em>Annees</em></strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(data_medailles_sport_ete<span class="sc">$</span>Annees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Depuis 1896"                      "Depuis 1900"                     
+ [3] "Depuis 1992"                      "Depuis 1936"                     
+ [5] "1904, 1908,depuis 1920"           "1900,depuis 1912"                
+ [7] "1900–1928,depuis 1936"            "1900–1904,depuis 2016"           
+ [9] "1936,depuis 1972"                 "1896, 1904,depuis 1920"          
+[11] "1908, 1920,depuis 1928"           "1964,depuis 1972"                
+[13] "1896,depuis 1904"                 "Depuis 1984"                     
+[15] "Depuis 1912"                      "Depuis 1904"                     
+[17] "Depuis 2000"                      "1896–1924,depuis 1988"           
+[19] "Depuis 1988"                      "1896, 1900,1908–1924,depuis 1932"
+[21] "1900-1912, 1920,depuis 1972"      "1900,depuis 1908"                
+[23] "Depuis 1964"                     </code></pre>
+</div>
+</div>
+<p>Avec cette ligne de code, nous pouvons voir qu’il existe plusieurs formats de remplissage. Nous devons alors trouver une fonction qui puisse les traiter au cas par cas.</p>
+</section>
+<section id="etape-2-méthodes-pour-les-extractions" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-méthodes-pour-les-extractions">Etape 2 : Méthodes pour les extractions</h3>
+<section id="cellules-avec-des-virgules" class="level4">
+<h4 class="anchored" data-anchor-id="cellules-avec-des-virgules">Cellules avec des virgules</h4>
+<p>Prenons un exemple disposant de tous les formats :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"1896, 1900,1908-1924,depuis 1932"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La première chose à faire est de séparer chaque élément lorsque nous voyons une virgule.</p>
+<p>Cela donne :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">str_split</span>(x,<span class="st">","</span>,<span class="at">simplify =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]   [,2]    [,3]        [,4]         
+[1,] "1896" " 1900" "1908-1924" "depuis 1932"</code></pre>
+</div>
+</div>
+<p>r est une matrice et nous avons :<br>
+– “1896”<br>
+– ” 1900”<br>
+– “1908-1924”<br>
+– “depuis 1932”<br>
+Chaque élément dispose d’un format différent qui doit être traité de manière adéquate.</p>
+</section>
+<section id="une-année-uniquement" class="level4">
+<h4 class="anchored" data-anchor-id="une-année-uniquement">Une année uniquement</h4>
+<p>L’année 1896 se situe à la première ligne et première colonne. Ainsi, une simple sélection de la manière suivante suffit pour l’extraire.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>r[<span class="dv">1</span>,<span class="dv">1</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1896"</code></pre>
+</div>
+</div>
+</section>
+<section id="une-année-avec-un-espace" class="level4">
+<h4 class="anchored" data-anchor-id="une-année-avec-un-espace">Une année avec un espace</h4>
+<p>Pour l’extraction d’une année avec un espace, il suffit de mettre le type de l’élément en entier. L’année 1900 est sur la première ligne, deuxième colonne.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(r[<span class="dv">1</span>,<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1900</code></pre>
+</div>
+</div>
+</section>
+<section id="années-séparées-par-un--" class="level4">
+<h4 class="anchored" data-anchor-id="années-séparées-par-un--">Années séparées par un -</h4>
+<p>Pour l’extraction des années, il suffit d’avoir recours à une expression <em>regex</em> ainsi qu’à la fonction <em>str_extract_all</em> comme suit.</p>
+<p>Nous nous concentrons sur l’élément se trouvant sur la première ligne et troisième colonne.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract_all</span>(r[<span class="dv">1</span>,<span class="dv">3</span>],<span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "1908" "1924"</code></pre>
+</div>
+</div>
+</section>
+<section id="années-avec-depuis" class="level4">
+<h4 class="anchored" data-anchor-id="années-avec-depuis">Années avec depuis</h4>
+<p>Pour enlever le “depuis”, il suffit de faire la ligne de code précédente car cette dernière ne prend en compte que les caractères numériques.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract_all</span>(<span class="st">"depuis 1932"</span>,<span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "1932"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="etape-3-créer-une-fonction" class="level3">
+<h3 class="anchored" data-anchor-id="etape-3-créer-une-fonction">Etape 3 : Créer une fonction</h3>
+<p>Nous avons seulement réalisé les extractions pour la discipline “tir”.</p>
+<p>Nous souhaiterions faire le même travail pour chaque cellule et comme nous l’avons vu précédemment chaque cellule a des formats différents.</p>
+<p>Par conséquent, il faut créer une fonction qui va combiner toutes ces méthodes d’extraction à l’aide de boucles for. Cependant, je n’ai malheureusement pas réussi à la réaliser. Je n’ai également pas réussi à faire les autres questions.</p>
+<p>Place maintenant à l’exercice suivant.</p>
+</section>
+</section>
+</section>
+<section id="exercice---semaine-3" class="level1">
+<h1>Exercice - semaine 3</h1>
+<p>Nous importons les différents packages qui vont nous être utiles pour réaliser cette excercice.<br>
+Nous ignorons le fichier CSV qui vient de l’exercice 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arrow)</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-1">Question 1</h2>
+<p>Listez les fichiers présents dans le dossier data.<br>
+Quelles sont les extensions des différents fichiers ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"data/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>character(0)</code></pre>
+</div>
+</div>
+<p>Les extensions des différents fichiers sont json, sqlite et parquet.</p>
+</section>
+<section id="question-2-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-2">Question 2</h2>
+<p>Lisez le fichier .parquet en utilisant la librairie <strong>arrow</strong>. Quelles sont les dimensions de la table ?<br>
+Quelles sont les colonnes présentes ?</p>
+<section id="etape-1-importation-1" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-importation-1">Etape 1 : Importation</h3>
+<p>Pour répondre à la question, nous importons tout d’abord le fichier parquet téléchargé qui se trouve dans le dossier data du projet Rstudio intitulé <em>exercices</em> à l’aide la fonction <em>read_parquet</em> qui se trouve dans le package <strong>arrow</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>tokyo_athletes <span class="ot">&lt;-</span> arrow <span class="sc">::</span> <span class="fu">read_parquet</span>(<span class="st">"C:/Users/Jasmine/Documents/Nantes/cours/SEMESTRE 2/R avancé/my_blog_2/posts/post-with-code/tokyo_athletes.parquet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="etape-finale-visualiser-la-base" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-visualiser-la-base">Etape finale : Visualiser la base</h3>
+<p>Pour faciliter la lecture du jeu de données, nous décidons de le transformer en tibble (cf.&nbsp;exercice 1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>tokyo_athletes <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(tokyo_athletes)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>tokyo_athletes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11,085 × 3
+   Name              NOC                      Discipline         
+   &lt;chr&gt;             &lt;chr&gt;                    &lt;chr&gt;              
+ 1 AALERUD Katrine   Norway                   Cycling Road       
+ 2 ABAD Nestor       Spain                    Artistic Gymnastics
+ 3 ABAGNALE Giovanni Italy                    Rowing             
+ 4 ABALDE Alberto    Spain                    Basketball         
+ 5 ABALDE Tamara     Spain                    Basketball         
+ 6 ABALO Luc         France                   Handball           
+ 7 ABAROA Cesar      Chile                    Rowing             
+ 8 ABASS Abobakr     Sudan                    Swimming           
+ 9 ABBASALI Hamideh  Islamic Republic of Iran Karate             
+10 ABBASOV Islam     Azerbaijan               Wrestling          
+# ℹ 11,075 more rows</code></pre>
+</div>
+</div>
+<p>Le tableau est composé de 11 085 athlètes et de 3 colonnes s’intitulant “Name”, “NOC” et “Discipline”.</p>
+</section>
+</section>
+<section id="question-3-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-1">Question 3</h2>
+<p>Lisez le fichier .json en utilisant la librairie jsonlite.<br>
+Quelles sont les dimensions de la table ?<br>
+Quelles sont les colonnes présentes ?</p>
+<section id="etape-1-importation-2" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-importation-2">Etape 1 : Importation</h3>
+<p>Pour répondre à la question, nous importons tout d’abord le fichier json téléchargé qui se trouve dans le dossier data du projet Rstudio intitulé <em>exercices</em> à l’aide la fonction <em>read_json</em> qui se trouve dans le package <strong>jsonlite</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes<span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(<span class="st">"C:/Users/Jasmine/Documents/Nantes/cours/SEMESTRE 2/R avancé/my_blog_2/posts/post-with-code/olympics_athletes.json"</span>, <span class="at">simplifyVector =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="etape-finale-visualiser-la-base-1" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-visualiser-la-base-1">Etape finale : Visualiser la base</h3>
+<p>Pour faciliter la lecture du jeu de données, nous décidons de le transformer en tibble (cf.&nbsp;exercice 1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(olympics_athletes)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>olympics_athletes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 269,731 × 13
+      ID Name      Sex     Age Height Weight Team  NOC   Games City  Sport Event
+   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1     1 A Dijiang M        24    180     80 China CHN   1992… Barc… Bask… Bask…
+ 2     2 A Lamusi  M        23    170     60 China CHN   2012… Lond… Judo  Judo…
+ 3     3 Gunnar N… M        24     NA     NA Denm… DEN   1920… Antw… Foot… Foot…
+ 4     4 Edgar Li… M        34     NA     NA Denm… DEN   1900… Paris Tug-… Tug-…
+ 5     5 Christin… F        21    185     82 Neth… NED   1988… Calg… Spee… Spee…
+ 6     5 Christin… F        21    185     82 Neth… NED   1988… Calg… Spee… Spee…
+ 7     5 Christin… F        25    185     82 Neth… NED   1992… Albe… Spee… Spee…
+ 8     5 Christin… F        25    185     82 Neth… NED   1992… Albe… Spee… Spee…
+ 9     5 Christin… F        27    185     82 Neth… NED   1994… Lill… Spee… Spee…
+10     5 Christin… F        27    185     82 Neth… NED   1994… Lill… Spee… Spee…
+# ℹ 269,721 more rows
+# ℹ 1 more variable: Medal &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>La table est composée de 269 731 athlètes et des 13 colonnes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(olympics_athletes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ID"     "Name"   "Sex"    "Age"    "Height" "Weight" "Team"   "NOC"   
+ [9] "Games"  "City"   "Sport"  "Event"  "Medal" </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="question-4-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-4-1">Question 4</h2>
+<p>Importez la librairie <strong>RSQLite</strong>, et ouvrez une connexion à la base de données sqlite en utilisant la fonction <em>dbConnec</em>t. Le driver à utiliser sera SQLite().<br>
+Quelles sont les tables présentes dans la table ?<br>
+Vous pourrez utiliser la fonction dbListTables.</p>
+<p>La lecture d’un fichier sqlite est particulière et nécessite d’avoir recours à d’autres méthodes.</p>
+<section id="etape-1-ouverture-dune-connexion" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-ouverture-dune-connexion">Etape 1 : Ouverture d’une connexion</h3>
+<p>Pour lire un fichier sqlite, il faut établir une connexion avec ce dernier à l’aide de la fonction <em>dbConnect</em> du package <strong>DBI</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="at">dbname =</span> <span class="st">"C:/Users/Jasmine/Documents/Nantes/cours/SEMESTRE 2/R avancé/my_blog_2/posts/post-with-code/data.sqlite"</span>)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>con</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;SQLiteConnection&gt;
+  Path: C:\Users\Jasmine\Documents\Nantes\cours\SEMESTRE 2\R avancé\my_blog_2\posts\post-with-code\data.sqlite
+  Extensions: TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="etape-2-liste-des-tables-présentes" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-liste-des-tables-présentes">Etape 2 : Liste des tables présentes</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "olympics_athletes" "tokyo_athletes"    "tokyo_medals"     
+[4] "tokyo_teams"      </code></pre>
+</div>
+</div>
+<p>Les tables présentes sont “tokyo_medals” et “tokyo_teams”.</p>
+</section>
+</section>
+<section id="question-5-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-5-1">Question 5</h2>
+<p>Créez deux nouvelles tables dans la base de données à l’aide de la fonction <em>dbWriteTable</em>.<br>
+Les tables s’appeleront respectivement olympics_athletes et tokyo_athletes pour les fichiers olympics_athletes.json et tokyo_athletes.parquet.</p>
+<p>Pour la création des 2 nouvelles tables, nous faisons appel à la fonction <em>dbWriteTable</em> de la manière suivante :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co">#dbWriteTable(con,"tokyo_athletes",tokyo_athletes)</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dbWriteTable(con,name = "olympics_athletes",value = olympics_athletes)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Le premier argument est la connexion définie précédemment.<br>
+Le deuxième argument est le nom de la nouvelle table.<br>
+Le troisième argument est le nom de la data dans laquelle le fichier a été importé. (cf questions 2 et 3)</p>
+</section>
+<section id="question-6-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-6-1">Question 6</h2>
+<p>Inspectez la table olympics_athletes en utilisant la fonction <em>dbListFields</em>.<br>
+Quelles sont les colonnes de la table ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListFields</span>(con,<span class="st">"olympics_athletes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ID"     "Name"   "Sex"    "Age"    "Height" "Weight" "Team"   "NOC"   
+ [9] "Games"  "City"   "Sport"  "Event"  "Medal" </code></pre>
+</div>
+</div>
+</section>
+<section id="question-7-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-7-1">Question 7</h2>
+<p>Importez cette table depuis la base de données en utilisant la fonction <em>dbReadTable</em>.<br>
+Convertissez la table en tibble en utilisant la fonction <em>as_tibble</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbReadTable</span>(con,<span class="st">"olympics_athletes"</span>) <span class="sc">|&gt;</span> <span class="fu">view</span>()</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">dbReadTable</span>(con,<span class="st">"olympics_athletes"</span>))</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>olympics_athletes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 269,731 × 13
+      ID Name      Sex     Age Height Weight Team  NOC   Games City  Sport Event
+   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1     1 A Dijiang M        24    180     80 China CHN   1992… Barc… Bask… Bask…
+ 2     2 A Lamusi  M        23    170     60 China CHN   2012… Lond… Judo  Judo…
+ 3     3 Gunnar N… M        24     NA     NA Denm… DEN   1920… Antw… Foot… Foot…
+ 4     4 Edgar Li… M        34     NA     NA Denm… DEN   1900… Paris Tug-… Tug-…
+ 5     5 Christin… F        21    185     82 Neth… NED   1988… Calg… Spee… Spee…
+ 6     5 Christin… F        21    185     82 Neth… NED   1988… Calg… Spee… Spee…
+ 7     5 Christin… F        25    185     82 Neth… NED   1992… Albe… Spee… Spee…
+ 8     5 Christin… F        25    185     82 Neth… NED   1992… Albe… Spee… Spee…
+ 9     5 Christin… F        27    185     82 Neth… NED   1994… Lill… Spee… Spee…
+10     5 Christin… F        27    185     82 Neth… NED   1994… Lill… Spee… Spee…
+# ℹ 269,721 more rows
+# ℹ 1 more variable: Medal &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La fermeture de la connexion avec <em>dbDisconnect</em> est nécessaire puisque nous n’allons plus utiliser cette dernière par la suite.</p>
+</section>
+<section id="question-8-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-8-1">Question 8</h2>
+<p>Convertissez la colonne <strong><em>Sex</em></strong> en variable catégorielle avec la fonction <em>mutate</em>.</p>
+<p>Une variable catégorielle est vue comme un facteur sur le logiciel, c’est-à-dire qu’elle dispose d’un nombre limité de modalités. Ici, la variable <strong><em>Sex</em></strong> n’a que 2 modalités. Par conséquent, la transformer en facteur est cohérent.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Sex=</span><span class="fu">factor</span>(Sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 269,731 × 13
+      ID Name      Sex     Age Height Weight Team  NOC   Games City  Sport Event
+   &lt;int&gt; &lt;chr&gt;     &lt;fct&gt; &lt;int&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1     1 A Dijiang M        24    180     80 China CHN   1992… Barc… Bask… Bask…
+ 2     2 A Lamusi  M        23    170     60 China CHN   2012… Lond… Judo  Judo…
+ 3     3 Gunnar N… M        24     NA     NA Denm… DEN   1920… Antw… Foot… Foot…
+ 4     4 Edgar Li… M        34     NA     NA Denm… DEN   1900… Paris Tug-… Tug-…
+ 5     5 Christin… F        21    185     82 Neth… NED   1988… Calg… Spee… Spee…
+ 6     5 Christin… F        21    185     82 Neth… NED   1988… Calg… Spee… Spee…
+ 7     5 Christin… F        25    185     82 Neth… NED   1992… Albe… Spee… Spee…
+ 8     5 Christin… F        25    185     82 Neth… NED   1992… Albe… Spee… Spee…
+ 9     5 Christin… F        27    185     82 Neth… NED   1994… Lill… Spee… Spee…
+10     5 Christin… F        27    185     82 Neth… NED   1994… Lill… Spee… Spee…
+# ℹ 269,721 more rows
+# ℹ 1 more variable: Medal &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="question-9" class="level2">
+<h2 class="anchored" data-anchor-id="question-9">Question 9</h2>
+<p>Créez deux colonnes à partir de la colonne <strong><em>Games</em></strong>. La première colonne <strong><em>Year</em></strong> sera une colonne de type integer contenant l’année des jeux.<br>
+La deuxième colonne <strong><em>isSummer</em></strong> sera une colonne booléenne qui indiquera si les jeux sont des jeux d’été ou d’hiver.<br>
+Vous pourrez utiliser la fonction <em>separate_wider_delim</em> de <strong>tidyr</strong> notamment.</p>
+<section id="etape-1-observer-la-colonne-games-et-séparation" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-observer-la-colonne-games-et-séparation">Etape 1 : Observer la colonne Games et séparation</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(olympics_athletes<span class="sc">$</span>Games)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1992 Summer" "2012 Summer" "1920 Summer" "1900 Summer" "1988 Winter"
+[6] "1988 Winter"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="ot">&lt;-</span> olympics_athletes <span class="sc">|&gt;</span> <span class="fu">separate_wider_delim</span>(Games, <span class="at">delim =</span> <span class="st">" "</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"isSummer"</span>))</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(olympics_athletes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ID"       "Name"     "Sex"      "Age"      "Height"   "Weight"  
+ [7] "Team"     "NOC"      "Year"     "isSummer" "City"     "Sport"   
+[13] "Event"    "Medal"   </code></pre>
+</div>
+</div>
+<p>Les années et saisons sont séparées par un espace dans les cellules de la colonne <strong><em>Games</em></strong>.<br>
+Le logiciel crée les 2 variables <strong><em>Year</em></strong> et <strong><em>isSummer</em></strong>.<br>
+La première variable prend les valeurs se trouvant à gauche de l’espace.<br>
+La deuxième variable prend les valeurs se trouvant à droite de l’espace.</p>
+</section>
+<section id="etape-2-changer-le-type-de-la-variable-year" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-changer-le-type-de-la-variable-year">Etape 2 : Changer le type de la variable Year</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(olympics_athletes<span class="sc">$</span>Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> chr [1:269731] "1992" "2012" "1920" "1900" "1988" "1988" "1992" "1992" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(olympics_athletes<span class="sc">$</span>Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="etape-3-observation-et-transformer-la-variable-issummer" class="level3">
+<h3 class="anchored" data-anchor-id="etape-3-observation-et-transformer-la-variable-issummer">Etape 3 : Observation et transformer la variable isSummer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(olympics_athletes<span class="sc">$</span>isSummer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Summer" "Winter"</code></pre>
+</div>
+</div>
+<p>La variable prend ces 2 modalités.<br>
+Nous allons par conséquent lui associer les valeurs 1 et 0 de la manière suivante :<br>
+– 1 si la modalité vaut “Summer”<br>
+– 0 sinon</p>
+<p>Nous finissons par la transformer en facteur.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="ot">&lt;-</span> olympics_athletes <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">isSummer=</span> <span class="fu">ifelse</span>(isSummer <span class="sc">==</span> <span class="st">"Summer"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>olympics_athletes<span class="sc">$</span>isSummer <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(olympics_athletes<span class="sc">$</span>isSummer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="question-10" class="level2">
+<h2 class="anchored" data-anchor-id="question-10">Question 10</h2>
+<p>Calculez la moyenne d’age des athletes pour chacune des éditions des JO d’été.<br>
+Quelle édition a compté les athlètes les plus jeunes ? Les plus vieux ?</p>
+<p>Avant de calculer la moyenne ou toute autre statistique de base, il faut faire attention à la présence de valeurs manquantes. En effet, le résultat renverra un résultat nul si des valeurs manquantes sont introduites dans le calcul.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(olympics_athletes<span class="sc">$</span>Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9315</code></pre>
+</div>
+</div>
+<p>La variable <strong><em>Age</em></strong> a bien 9315 valeurs manquantes. Par conséquent, il faut préciser la suppression des valeurs manquantes dans la formule de la moyenne.</p>
+<section id="etape-1-calcul-de-lâge-moyen-global" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-calcul-de-lâge-moyen-global">Etape 1 : Calcul de l’âge moyen global</h3>
+<p>Avant de calculer l’âge moyen des athlètes pour chacune des éditions, nous trouvons intéressant de calculer l’âge moyen global</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> </span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"1"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">moy_age=</span><span class="fu">mean</span>(Age,<span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  moy_age
+    &lt;dbl&gt;
+1    25.5</code></pre>
+</div>
+</div>
+<p>La moyenne d’âge sur l’ensemble des JO d’été est de 25,5 ans.</p>
+</section>
+<section id="etape-2-age-moyen-pour-chaque-édition" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-age-moyen-pour-chaque-édition">Etape 2 : Age moyen pour chaque édition</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> </span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"1"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">|&gt;</span> </span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">moy_age=</span><span class="fu">mean</span>(Age,<span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 29 × 2
+    Year moy_age
+   &lt;int&gt;   &lt;dbl&gt;
+ 1  1896    23.6
+ 2  1900    28.9
+ 3  1904    26.7
+ 4  1906    27.1
+ 5  1908    27.0
+ 6  1912    27.5
+ 7  1920    29.3
+ 8  1924    28.1
+ 9  1928    28.0
+10  1932    30.2
+# ℹ 19 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="etape-3-tri-par-ordre-décroissant-de-lâge-moyen" class="level3">
+<h3 class="anchored" data-anchor-id="etape-3-tri-par-ordre-décroissant-de-lâge-moyen">Etape 3 : Tri par ordre décroissant de l’âge moyen</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> </span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"1"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">|&gt;</span> </span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">moy_age=</span><span class="fu">mean</span>(Age,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(moy_age)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 29 × 2
+    Year moy_age
+   &lt;int&gt;   &lt;dbl&gt;
+ 1  1932    30.2
+ 2  1920    29.3
+ 3  1900    28.9
+ 4  1948    28.8
+ 5  1924    28.1
+ 6  1928    28.0
+ 7  1912    27.5
+ 8  1936    27.2
+ 9  1906    27.1
+10  1908    27.0
+# ℹ 19 more rows</code></pre>
+</div>
+</div>
+<p>L’édition de 1932 a compté les plus vieux athlètes avec une moyenne d’âge de 30,2 ans.</p>
+</section>
+<section id="etape-finale-tri-par-ordre-croissant-de-lâge-moyen" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-tri-par-ordre-croissant-de-lâge-moyen">Etape finale : Tri par ordre croissant de l’âge moyen</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> </span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"1"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">|&gt;</span> </span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">moy_age=</span><span class="fu">mean</span>(Age,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>((moy_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 29 × 2
+    Year moy_age
+   &lt;int&gt;   &lt;dbl&gt;
+ 1  1896    23.6
+ 2  1980    23.7
+ 3  1976    23.9
+ 4  1984    24.0
+ 5  1988    24.1
+ 6  1968    24.3
+ 7  1972    24.3
+ 8  1992    24.4
+ 9  1996    24.9
+10  1964    25.1
+# ℹ 19 more rows</code></pre>
+</div>
+</div>
+<p>L’édition de 1896 a compté les plus jeunes athlètes avec une moyenne d’âge de 23,6 ans.</p>
+</section>
+</section>
+<section id="question-11" class="level2">
+<h2 class="anchored" data-anchor-id="question-11">Question 11</h2>
+<p>Quelle est la discipline des JO d’été dont la taille des athlètes féminines est la plus grande ?<br>
+Quelle a été cette discipline au cours de chacune des éditions ?<br>
+Calculez le nombre de fois où chaque discipline a été la discipline avec les plus grandes athlètes.</p>
+<section id="etape-1-tri-par-ordre-décroissant-de-la-taille" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-tri-par-ordre-décroissant-de-la-taille">Etape 1 : Tri par ordre décroissant de la taille</h3>
+<p>Pour répondre à la première question, nous filtrons sur les JO d’été et le sexe féminin puis nous trions par ordre décroissant la taille sur l’ensemble des éditions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> </span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> Sex <span class="sc">==</span><span class="st">"F"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Height)) <span class="sc">|&gt;</span> </span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Height,Sport) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 59,299 × 2
+   Height Sport     
+    &lt;int&gt; &lt;chr&gt;     
+ 1    213 Basketball
+ 2    210 Basketball
+ 3    210 Basketball
+ 4    206 Basketball
+ 5    205 Basketball
+ 6    205 Basketball
+ 7    204 Volleyball
+ 8    204 Basketball
+ 9    204 Basketball
+10    204 Basketball
+# ℹ 59,289 more rows</code></pre>
+</div>
+</div>
+<p>Sur la plupart des éditions, le basketball est la discipline qui a comptabilisé la plus grande taille.</p>
+</section>
+<section id="etape-2-tri-par-ordre-décroissant-selon-les-années" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-tri-par-ordre-décroissant-selon-les-années">Etape 2 : Tri par ordre décroissant selon les années</h3>
+<p>Pour répondre à la seconde question, nous réalisons la même manipulation en y ajoutant le regroupement par années comme suit :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> </span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"1"</span><span class="sc">&amp;</span> Sex <span class="sc">==</span><span class="st">"F"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">|&gt;</span> </span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Height)) <span class="sc">|&gt;</span> </span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Height,Sport) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Adding missing grouping variables: `Year`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 59,299 × 3
+# Groups:   Year [28]
+    Year Height Sport     
+   &lt;int&gt;  &lt;int&gt; &lt;chr&gt;     
+ 1  2000    213 Basketball
+ 2  1976    210 Basketball
+ 3  1980    210 Basketball
+ 4  2012    206 Basketball
+ 5  1984    205 Basketball
+ 6  1984    205 Basketball
+ 7  2000    204 Volleyball
+ 8  1984    204 Basketball
+ 9  1988    204 Basketball
+10  1992    204 Basketball
+# ℹ 59,289 more rows</code></pre>
+</div>
+</div>
+<p>Une majorité des éditions a enregistré le basketball comme étant la discipline qui a enregisté la plus grande taille.</p>
+</section>
+<section id="etape-finale-calcul-du-nombre-doccurrences" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-calcul-du-nombre-doccurrences">Etape finale : Calcul du nombre d’occurrences</h3>
+<p>Pour répondre à la dernière question, nous filtrons en triant la taille par ordre décroissant et nous demandons au logiciel de compter le nombre de fois où chaque discipline a été la discipline avec les plus grandes athlètes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>olympics_athletes <span class="sc">|&gt;</span> </span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"1"</span> <span class="sc">&amp;</span> Sex <span class="sc">==</span><span class="st">"F"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Height)) <span class="sc">|&gt;</span> </span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Sport, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 40 × 2
+   Sport          n
+   &lt;chr&gt;      &lt;int&gt;
+ 1 Athletics  11666
+ 2 Swimming    9850
+ 3 Gymnastics  9129
+ 4 Rowing      2193
+ 5 Fencing     2000
+ 6 Shooting    1724
+ 7 Volleyball  1543
+ 8 Hockey      1459
+ 9 Handball    1401
+10 Cycling     1394
+# ℹ 30 more rows</code></pre>
+</div>
+</div>
+<p>L’athlétisme a été 11 666 fois la discipline avec les plus grandes athlètes.</p>
+</section>
+</section>
+<section id="question-12" class="level2">
+<h2 class="anchored" data-anchor-id="question-12">Question 12</h2>
+<p>En utilisant les fonctions du package <strong>stringr</strong>, extrayez les dates des différentes éditions des JO.</p>
+<p>Aide : définissez une expression régulière capable de capturer une séquence de caractères représentant une date telle que “26 Juillet 2024”.<br>
+Vous pourrez utiliser cette <em>regex</em> avec la fonction <em>str_extract_all</em> par exemple.</p>
+<section id="etape-1-recopier-le-texte" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-recopier-le-texte">Etape 1 : Recopier le texte</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>texte <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Les jeux olympiques d’été se déroulent normalement tous les 4 ans, durant les mois</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="st">de Juillet et Août. Les jeux de Rio ont eu lieu du 5 Août 2016 au 20 Août 2016,</span></span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="st">ceux de Tokyo du 23 Juillet 2021 au 8 Août 2021, et ceux de Paris auront lieu du</span></span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a><span class="st">26 Juillet 2024 au 11 Août 2024. Plus de 10000 athlètes sont attendus du monde</span></span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="st">entier à Paris."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="etape-2-extraire-les-dates" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-extraire-les-dates">Etape 2 : Extraire les dates</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>regex_date <span class="ot">&lt;-</span> <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d{1,2}</span><span class="sc">\\</span><span class="st">s(?:Juillet|Août)</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">b"</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(texte, regex_date)[[<span class="dv">1</span>]]</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>dates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "5 Août 2016"     "20 Août 2016"    "23 Juillet 2021" "8 Août 2021"    
+[5] "26 Juillet 2024" "11 Août 2024"   </code></pre>
+</div>
+</div>
+<p>L’expression régulière est définie comme telle :<br>
+– d{1,2} signifie l’extraction d’1 ou 2 chiffres pour le jour<br>
+– s permet de mettre un espace<br>
+– (?:Juillet|Août)” correspond au mois écrit en toutes lettres. Ce dernier peut être soit “Juillet” soit “Août”.<br>
+– d{4} signifie l’extraction de 4 chiffres pour l’année</p>
+</section>
+</section>
+<section id="question-13" class="level2">
+<h2 class="anchored" data-anchor-id="question-13">Question 13</h2>
+<p>Remplacez les noms des mois par leur numéro pour rendre ces éléments convertibles en date en utilisant la fonction <em>str_replace</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>dates <span class="sc">|&gt;</span> <span class="fu">str_replace_all</span>(<span class="fu">c</span>(<span class="st">"Juillet"</span> <span class="ot">=</span> <span class="st">"07"</span>, <span class="st">"Août"</span><span class="ot">=</span><span class="st">"08"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "5 08 2016"  "20 08 2016" "23 07 2021" "8 08 2021"  "26 07 2024"
+[6] "11 08 2024"</code></pre>
+</div>
+</div>
+</section>
+<section id="question-14" class="level2">
+<h2 class="anchored" data-anchor-id="question-14">Question 14</h2>
+<p>Convertissez ces 3 éléments en date en utilisant la fonction appropriée du package <strong>lubridate</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy</span>(dates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2016-08-05" "2016-08-20" "2021-07-23" "2021-08-08" "2024-07-26"
+[6] "2024-08-11"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>dates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "5 Août 2016"     "20 Août 2016"    "23 Juillet 2021" "8 Août 2021"    
+[5] "26 Juillet 2024" "11 Août 2024"   </code></pre>
+</div>
+</div>
+</section>
+<section id="question-15" class="level2">
+<h2 class="anchored" data-anchor-id="question-15">Question 15</h2>
+<p>Combien de jours ont séparés les éditions de Rio et Tokyo ?<br>
+Et sépareront les éditions de Tokyo et de Paris ?<br>
+Faites le même calcul en semaines.</p>
+<section id="etape-1-calcul-du-nombre-de-jours-séparant-les-éditions-rio-et-tokyo" class="level3">
+<h3 class="anchored" data-anchor-id="etape-1-calcul-du-nombre-de-jours-séparant-les-éditions-rio-et-tokyo">Etape 1 : Calcul du nombre de jours séparant les éditions Rio et Tokyo</h3>
+<p>Pour calculer les jours, nous calculons la différence entre la date de fin de l’édition de Rio et la date de début de l’édition de Tokyo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>int <span class="ot">&lt;-</span> <span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">"2016-08-20"</span>), <span class="fu">ymd</span>(<span class="st">"2021-07-23"</span>))</span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">time_length</span>(int, <span class="at">unit =</span> <span class="st">"days"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1798</code></pre>
+</div>
+</div>
+<p>1798 jours ont séparés ces deux éditions.</p>
+</section>
+<section id="etape-2-calcul-du-nombre-de-semaines" class="level3">
+<h3 class="anchored" data-anchor-id="etape-2-calcul-du-nombre-de-semaines">Etape 2 : Calcul du nombre de semaines</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">time_length</span>(int, <span class="at">unit =</span> <span class="st">"weeks"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 256.8571</code></pre>
+</div>
+</div>
+<p>Il y a environ 256 semaines entre ces deux éditions.</p>
+</section>
+<section id="etape-3-calcul-du-nombre-de-jours-séparant-les-éditions-tokyo-et-paris" class="level3">
+<h3 class="anchored" data-anchor-id="etape-3-calcul-du-nombre-de-jours-séparant-les-éditions-tokyo-et-paris">Etape 3 : Calcul du nombre de jours séparant les éditions Tokyo et Paris</h3>
+<p>Pour calculer les jours, nous calculons la différence entre la date de fin de l’édition de Tokyo et la date de début de l’édition de Paris.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>int2 <span class="ot">&lt;-</span> <span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">"2021-08-08"</span>), <span class="fu">ymd</span>(<span class="st">" 2024-07-26"</span>))</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="fu">time_length</span>(int2, <span class="at">unit =</span> <span class="st">"days"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1083</code></pre>
+</div>
+</div>
+<p>1083 jours séparent ces deux éditions.</p>
+</section>
+<section id="etape-finale-calcul-du-nombre-de-semaines" class="level3">
+<h3 class="anchored" data-anchor-id="etape-finale-calcul-du-nombre-de-semaines">Etape finale : Calcul du nombre de semaines</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">time_length</span>(int2, <span class="at">unit =</span> <span class="st">"weeks"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 154.7143</code></pre>
+</div>
+</div>
+<p>Il y a environ 154 semaines entre ces deux éditions.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
